@@ -36,18 +36,18 @@
         rel="stylesheet"
     />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
+    <link rel="stylesheet" type="text/css" href="/vendors/styles/core.css" />
     <link
         rel="stylesheet"
         type="text/css"
-        href="vendors/styles/icon-font.min.css"
+        href="/vendors/styles/icon-font.min.css"
     />
     <link
         rel="stylesheet"
         type="text/css"
         href="src/plugins/jquery-steps/jquery.steps.css"
     />
-    <link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
 </head>
 
 <body class="login-page">
@@ -56,13 +56,13 @@
         class="container-fluid d-flex justify-content-between align-items-center"
     >
         <div class="brand-logo">
-            <a href="login.html">
-                <img src="vendors/images/deskapp-logo.svg" alt="" />
+            <a href="{{ route('login') }}">
+                <img src="/vendors/images/deskapp-logo.svg" alt="" />
             </a>
         </div>
         <div class="login-menu">
             <ul>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="{{ route('login') }}">Login</a></li>
             </ul>
         </div>
     </div>
@@ -109,50 +109,12 @@
                 eiusmod
             </div>
             <div class="modal-footer justify-content-center">
-                <a href="login.html" class="btn btn-primary">Done</a>
+                <a href="{{ route('login') }}" class="btn btn-primary">Done</a>
             </div>
         </div>
     </div>
 </div>
-<!-- success Popup html End -->
 
-    <div class="text-center mb-1">
-        <div>
-            <a
-                href="https://github.com/dropways/deskapp"
-                target="_blank"
-                class="btn btn-light btn-block btn-sm"
-            >
-                <span class="text-danger weight-600">STAR US</span>
-                <span class="weight-600">ON GITHUB</span>
-                <i class="fa fa-github"></i>
-            </a>
-        </div>
-        <script
-            async
-            defer="defer"
-            src="https://buttons.github.io/buttons.js"
-        ></script>
-    </div>
-    <a
-        href="https://github.com/dropways/deskapp"
-        target="_blank"
-        class="btn btn-success btn-sm mb-0 mb-md-3 w-100"
-    >
-        DOWNLOAD
-        <i class="fa fa-download"></i>
-    </a>
-    <p class="font-14 text-center mb-1 d-none d-md-block">
-        Available in the following technologies:
-    </p>
-    <div class="d-none d-md-flex justify-content-center h1 mb-0 text-danger">
-        <i class="fa fa-html5"></i>
-    </div>
-</div>
-<button class="welcome-modal-btn">
-    <i class="fa fa-download"></i> Download
-</button>
-<!-- welcome modal end -->
 <!-- js -->
 <script src="vendors/scripts/core.js"></script>
 <script src="vendors/scripts/script.min.js"></script>

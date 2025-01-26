@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace studiobarg\User\HTTP\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use studiobarg\User\Models\User;
+use studiobarg\User\Rules\validMobile;
+use studiobarg\User\Rules\validPassword;
 
 class RegisteredUserController extends Controller
 {
@@ -32,8 +33,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'mobile' => ['nullable', 'string', 'lowercase','min:9','max:14', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'mobile' => ['nullable', 'string', 'lowercase','min:9','max:14', 'unique:'.User::class,new validMobile()],
+            'password' => ['required', 'confirmed', new validPassword()],
         ]);
 
         $user = User::create([
@@ -42,7 +43,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
 	        'mobile' => request('mobile'),
         ]);
+        // ارسال ایمیل تأیید
+        event(new Registered($user));
 
-        return redirect(route('login', absolute: false));
+        // لاگین کاربر و هدایت به صفحه تأیید ایمیل
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
     }
 }
