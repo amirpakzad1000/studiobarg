@@ -1,4 +1,4 @@
-@extends('backend.auth.master')
+@extends('User::Front.auth.master')
 @section('content')
     <div class="col-md-6 col-lg-7">
         <img src="vendors/images/register-page-img.png" alt=""/>
@@ -17,7 +17,7 @@
                 @enderror
                 <div class="input-group custom">
                     <input id="name" class="form-control @error('name') is-invalid @enderror" type="text" name="name"
-                         autofocus autocomplete="name" placeholder="Full Name *" value="{{ old('name') }}"/>
+                           autofocus autocomplete="name" placeholder="Full Name *" value="{{ old('name') }}"/>
                     <div class="input-group-append custom">
                         <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                     </div>
@@ -54,7 +54,7 @@
                     <input id="password" class="form-control @error('password') is-invalid @enderror"
                            type="password"
                            name="password"
-                            autocomplete="new-password" placeholder="Password *" value="{{ old('password') }}">
+                           autocomplete="new-password" placeholder="Password *" value="{{ old('password') }}">
                     <div class="input-group-append custom">
                         <span class="input-group-text"><i class="icon-copy dw dw-password"></i></span>
                     </div>
@@ -65,22 +65,12 @@
                 @enderror
                 <div class="input-group custom">
                     <input class="form-control" id="password_confirmation" type="password"
-                    name="password_confirmation" autocomplete="new-password" placeholder="Confirm Password *">
+                           name="password_confirmation" autocomplete="new-password" placeholder="Confirm Password *">
                     <div class="input-group-append custom">
                         <span class="input-group-text"><i class="icon-copy dw dw-password"></i></span>
                     </div>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control form-control-lg" name="city" autocomplete="city"
-                               placeholder="city">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control form-control-lg" name="country" autocomplete="country"
-                               placeholder="country">
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="input-group mb-0">

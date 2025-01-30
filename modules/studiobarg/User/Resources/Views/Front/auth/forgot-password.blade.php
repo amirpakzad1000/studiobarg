@@ -1,4 +1,4 @@
-@extends('backend.auth.master')
+@extends('User::Front.auth.master')
 @section('content')
     <div class="col-md-6">
         <img src="vendors/images/forgot-password.png" alt="">
