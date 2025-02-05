@@ -520,7 +520,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Determine if the application is running unit tests.
+         * Determine if the application is running Unit tests.
          *
          * @return bool
          * @static
@@ -6508,7 +6508,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool hasTestNow()
      * @method static \Illuminate\Support\Carbon instance($date)
      * @method static bool isImmutable()
-     * @method static bool isModifiableUnit($unit)
+     * @method static bool isModifiableUnit($Unit)
      * @method static bool isMutable()
      * @method static bool isStrictModeEnabled()
      * @method static bool localeHasDiffOneDayWords($locale)
@@ -6523,7 +6523,7 @@ namespace Illuminate\Support\Facades {
      * @method static void mixin($mixin)
      * @method static \Illuminate\Support\Carbon now($tz = null)
      * @method static \Illuminate\Support\Carbon parse($time = null, $tz = null)
-     * @method static string pluralUnit(string $unit)
+     * @method static string pluralUnit(string $Unit)
      * @method static void resetMonthsOverflow()
      * @method static void resetToStringFormat()
      * @method static void resetYearsOverflow()
@@ -6540,7 +6540,7 @@ namespace Illuminate\Support\Facades {
      * @method static void setWeekendDays($days)
      * @method static bool shouldOverflowMonths()
      * @method static bool shouldOverflowYears()
-     * @method static string singularUnit(string $unit)
+     * @method static string singularUnit(string $Unit)
      * @method static \Illuminate\Support\Carbon today($tz = null)
      * @method static \Illuminate\Support\Carbon tomorrow($tz = null)
      * @method static void useMonthsOverflow($monthsOverflow = true)

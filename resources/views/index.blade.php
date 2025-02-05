@@ -458,7 +458,7 @@
     </div>
 </section>
 
-<!-- Service Section Start -->
+<!-- Services Section Start -->
 <section class="service-section section-padding pt-0">
     <div class="container">
         <div class="section-title text-center">

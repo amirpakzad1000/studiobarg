@@ -2711,7 +2711,7 @@ function isDurationValid(m) {
     for (var i = 0; i < ordering.length; ++i) {
         if (m[ordering[i]]) {
             if (unitHasDecimal) {
-                return false; // only allow non-integers for smallest unit
+                return false; // only allow non-integers for smallest Unit
             }
             if (parseFloat(m[ordering[i]]) !== toInt(m[ordering[i]])) {
                 unitHasDecimal = true;
@@ -4190,7 +4190,7 @@ function as (units) {
             case 'second' : return days * 86400 + milliseconds / 1000;
             // Math.floor prevents floating point math errors here
             case 'millisecond': return Math.floor(days * 864e5) + milliseconds;
-            default: throw new Error('Unknown unit ' + units);
+            default: throw new Error('Unknown Unit ' + units);
         }
     }
 }

@@ -1,11 +1,6 @@
 <?php
 use studiobarg\User\HTTP\Controllers\ProfileController;
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('User::Front.dashboard');
-    })->name('dashboard');
-});
+use studiobarg\User\HTTP\Controllers\Auth\VerifyEmailController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -13,6 +8,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['namespace'=>'studiobarg\User\HTTP\Controllers','middleware' => ['web']], function ($router) {
+Route::group([
+    'namespace'=>'studiobarg\User\HTTP\Controllers',
+    'middleware' => ['web']], function ($router) {
     require __DIR__ . '/auth.php';
+    Route::post('/verify-email', [VerifyEmailController::class, 'verify'])->name('verification.verify');
 });

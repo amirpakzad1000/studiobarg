@@ -15,8 +15,8 @@ class validMobile implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // بررسی شماره موبایل با Regex
-        if (!preg_match('/^\+98\d{10}$/', $value)) {
-            $fail(__('فیلد :attribute باید یک شماره موبایل معتبر با فرمت +98 باشد.'));
+        if (!preg_match('/^9\d{9}$/', $value)) {
+            $fail(__('فیلد :attribute باید یک شماره موبایل معتبر با فرمت مشابه 912 باشد.'));
         }
     }
 }

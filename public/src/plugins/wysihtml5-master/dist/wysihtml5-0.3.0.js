@@ -3399,7 +3399,7 @@ wysihtml5.browser = (function() {
   }
 
   return {
-    // Static variable needed, publicly accessible, to be able override it in unit tests
+    // Static variable needed, publicly accessible, to be able override it in Unit tests
     USER_AGENT: userAgent,
 
     /**
@@ -3468,7 +3468,7 @@ wysihtml5.browser = (function() {
 
     /**
      * Opera and IE are the only browsers who offer the css value
-     * in the original unit, thx to the currentStyle object
+     * in the original Unit, thx to the currentStyle object
      * All other browsers provide the computed style in px via window.getComputedStyle
      */
     hasCurrentStyleProperty: function() {
@@ -4510,7 +4510,7 @@ wysihtml5.dom.getStyle = (function() {
         }
 
         // currentStyle is no standard and only supported by Opera and IE but it has one important advantage over the standard-compliant
-        // window.getComputedStyle, since it returns css property values in their original unit:
+        // window.getComputedStyle, since it returns css property values in their original Unit:
         // If you set an elements width to "50%", window.getComputedStyle will give you it's current width in px while currentStyle
         // gives you the original "50%".
         // Opera supports both, currentStyle and window.getComputedStyle, that's why checking for currentStyle should have higher prio
@@ -7868,7 +7868,7 @@ wysihtml5.Commands = Base.extend(
   });
 })(wysihtml5);
 /**
- * TODO: the following methods still need unit test coverage
+ * TODO: the following methods still need Unit test coverage
  */
 wysihtml5.views.View = Base.extend(
   /** @scope wysihtml5.views.View.prototype */ {
@@ -8385,7 +8385,7 @@ wysihtml5.views.View = Base.extend(
       textareaElement.setAttribute("placeholder", originalPlaceholder);
     }
 
-    // When copying styles, we only get the computed style which is never returned in percent unit
+    // When copying styles, we only get the computed style which is never returned in percent Unit
     // Therefore we've to recalculate style onresize
     if (!wysihtml5.browser.hasCurrentStyleProperty()) {
       var winObserver = dom.observe(win, "resize", function() {

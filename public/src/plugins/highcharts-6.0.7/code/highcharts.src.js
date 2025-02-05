@@ -225,7 +225,7 @@
              * @memberOf Highcharts.Fx
              * @param {Number} from - The current value, value to start from.
              * @param {Number} to - The end value, value to land on.
-             * @param {String} [unit] - The property unit, for example `px`.
+             * @param {String} [unit] - The property Unit, for example `px`.
              *
              */
             run: function(from, to, unit) {
@@ -1345,7 +1345,7 @@
         };
 
         /**
-         * The time unit lookup
+         * The time Unit lookup
          */
         H.timeUnits = {
             millisecond: 1,
@@ -6041,7 +6041,7 @@
                 if (/px/.test(fontSize)) {
                     fontSize = pInt(fontSize);
                 } else if (/em/.test(fontSize)) {
-                    // The em unit depends on parent items
+                    // The em Unit depends on parent items
                     fontSize = parseFloat(fontSize) *
                         (elem ? this.fontMetrics(null, elem.parentNode).f : 16);
                 } else {
@@ -7675,7 +7675,7 @@
                 }
 
 
-                // record information on the chosen unit - for dynamic label formatter
+                // record information on the chosen Unit - for dynamic label formatter
                 tickPositions.info = extend(normalizedInterval, {
                     higherRanks: higherRanks,
                     totalRange: interval * count
@@ -8090,7 +8090,7 @@
                  * Information on the clicked spot can be found through `event.xAxis`
                  * and `event.yAxis`, which are arrays containing the axes of each dimension
                  * and each axis' value at the clicked spot. The primary axes are
-                 * `event.xAxis[0]` and `event.yAxis[0]`. Remember the unit of a
+                 * `event.xAxis[0]` and `event.yAxis[0]`. Remember the Unit of a
                  * datetime axis is milliseconds since 1970-01-01 00:00:00.
                  *
                  * <pre>click: function(e) {
@@ -8176,7 +8176,7 @@
                  * Information on the selected area can be found through `event.xAxis`
                  * and `event.yAxis`, which are arrays containing the axes of each dimension
                  * and each axis' min and max values. The primary axes are `event.xAxis[0]`
-                 * and `event.yAxis[0]`. Remember the unit of a datetime axis is milliseconds
+                 * and `event.yAxis[0]`. Remember the Unit of a datetime axis is milliseconds
                  * since 1970-01-01 00:00:00.
                  *
                  * <pre>selection: function(event) {
@@ -10287,7 +10287,7 @@
                  * For series on a datetime axes, the date format in the tooltip's
                  * header will by default be guessed based on the closest data points.
                  * This member gives the default string representations used for
-                 * each unit. For an overview of the replacement codes, see [dateFormat](#Highcharts.
+                 * each Unit. For an overview of the replacement codes, see [dateFormat](#Highcharts.
                  * dateFormat).
                  *
                  * Defaults to:
@@ -11574,10 +11574,10 @@
 
                 /**
                  * For a datetime axis, the scale will automatically adjust to the
-                 * appropriate unit. This member gives the default string
-                 * representations used for each unit. For intermediate values,
-                 * different units may be used, for example the `day` unit can be used
-                 * on midnight and `hour` unit be used for intermediate values on the
+                 * appropriate Unit. This member gives the default string
+                 * representations used for each Unit. For intermediate values,
+                 * different units may be used, for example the `day` Unit can be used
+                 * on midnight and `hour` Unit be used for intermediate values on the
                  * same axis. For an overview of the replacement codes, see
                  * [dateFormat](#Highcharts.dateFormat). Defaults to:
                  *
@@ -12189,7 +12189,7 @@
                  * calculated as a fifth of the tickInterval. If `null`, minor
                  * ticks are not shown.
                  *
-                 * On logarithmic axes, the unit is the power of the value. For example,
+                 * On logarithmic axes, the Unit is the power of the value. For example,
                  * setting the minorTickInterval to 1 puts one tick on each of 0.1,
                  * 1, 10, 100 etc. Setting the minorTickInterval to 0.1 produces 9
                  * ticks between 1 and 10, 10 and 100 etc.
@@ -12295,13 +12295,13 @@
                 /**
                  * The minimum range to display on this axis. The entire axis will not
                  * be allowed to span over a smaller interval than this. For example,
-                 * for a datetime axis the main unit is milliseconds. If minRange is
+                 * for a datetime axis the main Unit is milliseconds. If minRange is
                  * set to 3600000, you can't zoom in more than to one hour.
                  *
                  * The default minRange for the x axis is five times the smallest
                  * interval between any of the data points.
                  *
-                 * On a logarithmic axis, the unit for the minimum range is the power.
+                 * On a logarithmic axis, the Unit for the minimum range is the power.
                  * So a minRange of 1 means that the axis can be zoomed to 10-100,
                  * 100-1000, 1000-10000 etc.
                  *
@@ -13319,7 +13319,7 @@
                         multi = Math.pow(numSymMagnitude, i + 1);
                         if (
                             // Only accept a numeric symbol when the distance is more
-                            // than a full unit. So for example if the symbol is k, we
+                            // than a full Unit. So for example if the symbol is k, we
                             // don't accept numbers like 0.5k.
                             numericSymbolDetector >= multi &&
                             // Accept one decimal before the symbol. Accepts 0.5k but
@@ -14482,7 +14482,7 @@
                 this.trimTicks(tickPositions, startOnTick, endOnTick);
                 if (!this.isLinked) {
 
-                    // Substract half a unit (#2619, #2846, #2515, #3390),
+                    // Substract half a Unit (#2619, #2846, #2515, #3390),
                     // but not in case of multiple ticks (#6897)
                     if (this.single && tickPositions.length < 2) {
                         this.min -= 0.5;
@@ -16219,7 +16219,7 @@
             normalizeTickInterval = H.normalizeTickInterval,
             timeUnits = H.timeUnits;
         /**
-         * Set the tick positions to a time unit that makes sense, for example
+         * Set the tick positions to a time Unit that makes sense, for example
          * on the first of each month or on every Monday. Return an array
          * with the time positions. Used in datetime axes as well as for grouping
          * data on a datetime axis.
@@ -16236,7 +16236,7 @@
 
         /**
          * Get a normalized tick interval for dates. Returns a configuration object with
-         * unit range (interval), count and name. Used to prepare data for getTimeTicks.
+         * Unit range (interval), count and name. Used to prepare data for getTimeTicks.
          * Previously this logic was part of getTimeTicks, but as getTimeTicks now runs
          * of segments in stock charts, the normalizing logic was extracted in order to
          * prevent it for running over again for each segment having the same interval.
@@ -16248,7 +16248,7 @@
         ) {
             var units = unitsOption || [
                     [
-                        'millisecond', // unit name
+                        'millisecond', // Unit name
                         [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
                     ],
                     [
@@ -16274,7 +16274,7 @@
                         null
                     ]
                 ],
-                unit = units[units.length - 1], // default unit is years
+                unit = units[units.length - 1], // default Unit is years
                 interval = timeUnits[unit[0]],
                 multiples = unit[1],
                 count,
@@ -16289,11 +16289,11 @@
 
                 if (units[i + 1]) {
                     // lessThan is in the middle between the highest multiple and the
-                    // next unit.
+                    // next Unit.
                     var lessThan = (interval * multiples[multiples.length - 1] +
                         timeUnits[units[i + 1][0]]) / 2;
 
-                    // break and keep the current unit
+                    // break and keep the current Unit
                     if (tickInterval <= lessThan) {
                         break;
                     }
@@ -24573,7 +24573,7 @@
                  * @type {String}
                  * @sample {highcharts|highstock}
                  *         highcharts/plotoptions/series-datalabels-format/
-                 *         Add a unit
+                 *         Add a Unit
                  * @sample {highmaps}
                  *         maps/plotoptions/series-datalabels-format/
                  *         Formatted value in the data label
@@ -30671,7 +30671,7 @@
             /**
              * The X axis range that each point is valid for. This determines the
              * width of the column. On a categorized axis, the range will be 1
-             * by default (one category unit). On linear and datetime axes, the
+             * by default (one category Unit). On linear and datetime axes, the
              * range will be computed as the distance between the two closest data
              * points.
              *
