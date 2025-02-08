@@ -1,6 +1,13 @@
 <?php
-use studiobarg\User\HTTP\Controllers\ProfileController;
+
+use studiobarg\User\HTTP\Controllers\Auth\AuthenticatedSessionController;
+use studiobarg\User\HTTP\Controllers\Auth\EmailVerificationNotificationController;
+use studiobarg\User\HTTP\Controllers\Auth\EmailVerificationPromptController;
+use studiobarg\User\HTTP\Controllers\Auth\NewPasswordController;
+use studiobarg\User\HTTP\Controllers\Auth\PasswordResetLinkController;
+use studiobarg\User\HTTP\Controllers\Auth\RegisteredUserController;
 use studiobarg\User\HTTP\Controllers\Auth\VerifyEmailController;
+use studiobarg\User\HTTP\Controllers\ProfileController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -9,8 +16,35 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group([
-    'namespace'=>'studiobarg\User\HTTP\Controllers',
+    'namespace' => 'studiobarg\User\HTTP\Controllers',
     'middleware' => ['web']], function ($router) {
-    require __DIR__ . '/auth.php';
+
+
+    //login logout
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    //register
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+
+    //password
+    Route::get('/password/reset', [PasswordResetLinkController::class, 'showVerifyCodeRequestForm'])
+        ->name('password.request');
+    Route::get('/password/reset/send', [PasswordResetLinkController::class, 'sendVerifyCodeEmail'])
+        ->name('password.sendVerifyCodeEmail');
+
+    Route::post('/password/reset/check-verify-code', [PasswordResetLinkController::class, 'checkVerifyCode'])
+        ->name('password.checkVerifyCode')
+        ->middleware('throttle:5,1');
+    Route::get('/password/change', [NewPasswordController::class, 'showResetForm'])
+        ->name('password.showResetForm')
+        ->middleware('auth');
+    Route::post('/password/change', [NewPasswordController::class, 'reset'])->name('password.update');
+    //verify-email
+    Route::get('/verify-email', EmailVerificationPromptController::class)->name('verification.notice');
     Route::post('/verify-email', [VerifyEmailController::class, 'verify'])->name('verification.verify');
+    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->name('verification.send');
+
 });

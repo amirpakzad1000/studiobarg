@@ -11,16 +11,26 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use studiobarg\User\HTTP\Requests\changePasswordRequest;
 use studiobarg\User\Models\User;
+use studiobarg\User\Services\userService;
 
 class NewPasswordController extends Controller
 {
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function showResetForm(Request $request,$token = null): View
     {
-        return view('User::Front.auth.reset-password', ['request' => $request]);
+        return view('User::Front.auth.reset-password')->with([
+            'token' => $token,
+            'request' => $request->email
+        ]);
+    }
+
+    public function reset(changePasswordRequest $request){
+        userService::changePassword(auth()->user(),$request->password);
+        return redirect('/');
     }
 
     /**

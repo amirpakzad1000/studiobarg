@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use studiobarg\User\Notifications\ResetPasswordRequestNotification;
 use studiobarg\User\Notifications\VerifyMailNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -27,4 +28,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyMailNotification());
     }
+    public function sendResetPasswordRequestNotification(): void
+    {
+        $this->notify(new ResetPasswordRequestNotification());
+    }
+
 }

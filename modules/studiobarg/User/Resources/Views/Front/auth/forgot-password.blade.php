@@ -1,7 +1,7 @@
 @extends('User::Front.auth.master')
 @section('content')
     <div class="col-md-6">
-        <img src="vendors/images/forgot-password.png" alt="">
+        <img src="/vendors/images/forgot-password.png" alt="">
     </div>
     <div class="col-md-6">
         <div class="login-box bg-white box-shadow border-radius-10">
@@ -11,9 +11,7 @@
             <h6 class="mb-20">
                 Enter your email address to reset your password
             </h6>
-            <form method="POST" action="{{ route('password.email') }}">
-                @csrf
-
+            <form method="Get" action="{{ route('password.sendVerifyCodeEmail') }}">
                 @error('email')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -29,7 +27,7 @@
                 <div class="row align-items-center">
                     <div class="col-5">
                         <div class="input-group mb-0">
-                            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
                         </div>
                     </div>
                     <div class="col-2">

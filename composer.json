@@ -26,6 +26,8 @@
         "psr-4": {
             "App\\": "app/",
             "studiobarg\\User\\": "modules/studiobarg/User/",
+            "studiobarg\\Dashboard\\": "modules/studiobarg/Dashboard/",
+            "studiobarg\\Category\\": "modules/studiobarg/Category/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }

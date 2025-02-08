@@ -11,9 +11,7 @@ use studiobarg\User\Services\VerifyCodeService;
 
 class VerifyEmailController extends Controller
 {
-    /**
-     * Mark the authenticated user's email address as verified.
-     */
+
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
@@ -31,7 +29,7 @@ class VerifyEmailController extends Controller
     public function verify(Request $request)
     {
         if ( !VerifyCodeService::check(auth()->id(), $request->verify_code )) {
-            return back()->withErrors(['verify_code' => 'The provided code is not correct.']);
+            return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمی باشد']);
         }
         auth()->user()->markEmailAsVerified();
         return redirect()->route('dashboard');

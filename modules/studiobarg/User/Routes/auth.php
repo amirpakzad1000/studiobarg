@@ -1,5 +1,5 @@
 <?php
-
+/*
 use Illuminate\Support\Facades\Route;
 use studiobarg\User\HTTP\Controllers\Auth\AuthenticatedSessionController;
 use studiobarg\User\HTTP\Controllers\Auth\ConfirmablePasswordController;
@@ -52,4 +52,4 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-});
+});*/
