@@ -381,7 +381,7 @@ function mergeConfigs(parentConfig, childConfig) {
         if (hasOwnProp(parentConfig, prop) &&
                 !hasOwnProp(childConfig, prop) &&
                 isObject(parentConfig[prop])) {
-            // make sure changes to properties don't modify parent config
+            // make sure changes to properties don't modify parent Config
             res[prop] = extend({}, res[prop]);
         }
     }
@@ -1789,7 +1789,7 @@ var baseConfig = {
     meridiemParse: defaultLocaleMeridiemParse
 };
 
-// internal storage for locale config files
+// internal storage for locale Config files
 var locales = {};
 var localeFamilies = {};
 var globalLocale;
@@ -1874,9 +1874,9 @@ function defineLocale (name, config) {
         config.abbr = name;
         if (locales[name] != null) {
             deprecateSimple('defineLocaleOverride',
-                    'use moment.updateLocale(localeName, config) to change ' +
+                    'use moment.updateLocale(localeName, Config) to change ' +
                     'an existing locale. moment.defineLocale(localeName, ' +
-                    'config) should only be used for creating a new locale ' +
+                    'Config) should only be used for creating a new locale ' +
                     'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
             parentConfig = locales[name]._config;
         } else if (config.parentLocale != null) {
@@ -1936,7 +1936,7 @@ function updateLocale(name, config) {
         // backwards compat for now: also set the locale
         getSetGlobalLocale(name);
     } else {
-        // pass null for config to unupdate, useful for tests
+        // pass null for Config to unupdate, useful for tests
         if (locales[name] != null) {
             if (locales[name].parentLocale != null) {
                 locales[name] = locales[name].parentLocale;
@@ -2109,7 +2109,7 @@ function dayOfYearFromWeekInfo(config) {
 
         // TODO: We need to take the current isoWeekYear, but that depends on
         // how we interpret now (local, utc, fixed offset). So create
-        // a now version of current config (take local/utc/offset flags, and
+        // a now version of current Config (take local/utc/offset flags, and
         // create now).
         weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
         week = defaults(w.W, 1);
@@ -2410,7 +2410,7 @@ function configFromStringAndFormat(config) {
         token = tokens[i];
         parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
         // console.log('token', token, 'parsedInput', parsedInput,
-        //         'regex', getParseRegexForToken(token, config));
+        //         'regex', getParseRegexForToken(token, Config));
         if (parsedInput) {
             skipped = string.substr(0, string.indexOf(parsedInput));
             if (skipped.length > 0) {

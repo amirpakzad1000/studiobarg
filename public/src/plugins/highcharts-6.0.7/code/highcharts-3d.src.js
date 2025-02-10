@@ -27,21 +27,21 @@
             pick = H.pick;
         /**
          * Apply 3-D rotation
-         * Euler Angles (XYZ): cosA = cos(Alfa|Roll), cosB = cos(Beta|Pitch), cosG = cos(Gamma|Yaw) 
-         * 
+         * Euler Angles (XYZ): cosA = cos(Alfa|Roll), cosB = cos(Beta|Pitch), cosG = cos(Gamma|Yaw)
+         *
          * Composite rotation:
          * |          cosB * cosG             |           cosB * sinG            |    -sinB    |
          * | sinA * sinB * cosG - cosA * sinG | sinA * sinB * sinG + cosA * cosG | sinA * cosB |
          * | cosA * sinB * cosG + sinA * sinG | cosA * sinB * sinG - sinA * cosG | cosA * cosB |
-         * 
+         *
          * Now, Gamma/Yaw is not used (angle=0), so we assume cosG = 1 and sinG = 0, so we get:
          * |     cosB    |   0    |   - sinB    |
          * | sinA * sinB |  cosA  | sinA * cosB |
          * | cosA * sinB | - sinA | cosA * cosB |
-         * 
+         *
          * But in browsers, y is reversed, so we get sinA => -sinA. The general result is:
          * |      cosB     |   0    |    - sinB     |     | x |     | px |
-         * | - sinA * sinB |  cosA  | - sinA * cosB |  x  | y |  =  | py | 
+         * | - sinA * sinB |  cosA  | - sinA * cosB |  x  | y |  =  | py |
          * |  cosA * sinB  |  sinA  |  cosA * cosB  |     | z |     | pz |
          */
         function rotate3D(x, y, z, angles) {
@@ -533,10 +533,10 @@
                 isRight,
                 options3d = chart.options.chart.options3d,
                 alpha = options3d.alpha,
-                // Priority for x axis is the biggest, 
+                // Priority for x axis is the biggest,
                 // because of x direction has biggest influence on zIndex
                 incrementX = 10000,
-                // y axis has the smallest priority in case of our charts 
+                // y axis has the smallest priority in case of our charts
                 // (needs to be set because of stacking)
                 incrementY = 10,
                 incrementZ = 100,
@@ -587,7 +587,7 @@
 
             /*
              * First value - path with specific side
-             * Second  value - added information about side for later calculations. 
+             * Second  value - added information about side for later calculations.
              * Possible second values are 0 for path1, 1 for path2 and -1 for no path choosed.
              */
             var pickShape = function(path1, path2) {
@@ -834,7 +834,7 @@
                     to,
                     anim;
 
-                // Attribute-line properties connected to 3D. These shouldn't have been in the 
+                // Attribute-line properties connected to 3D. These shouldn't have been in the
                 // attribs collection in the first place.
                 delete params.center;
                 delete params.z;
@@ -922,7 +922,7 @@
                 ss = Math.sin(start), // sinus of the start angle
                 ce = Math.cos(end), // cosinus of the end angle
                 se = Math.sin(end), // sinus of the end angle
-                rx = r * Math.cos(beta), // x-radius 
+                rx = r * Math.cos(beta), // x-radius
                 ry = r * Math.cos(alpha), // y-radius
                 irx = ir * Math.cos(beta), // x-radius (inner)
                 iry = ir * Math.cos(alpha), // y-radius (inner)
@@ -953,7 +953,7 @@
             //    4)   /   /   \   \  1)
             //        /   /     \   \
             //       /   /       \   \
-            // (c)=> ====         ==== <=(d) 
+            // (c)=> ====         ==== <=(d)
             //       \   \       /   /
             //        \   \<=(a)/   /
             //         \   \   /   / <=(b)
@@ -1103,7 +1103,7 @@
         Chart.prototype.propsRequireUpdateSeries.push('chart.options3d');
 
         // Legacy support for HC < 6 to make 'scatter' series in a 3D chart route to the
-        // real 'scatter3d' series type. 
+        // real 'scatter3d' series type.
         wrap(Chart.prototype, 'initSeries', function(proceed, options) {
             var type = options.type ||
                 this.options.chart.type ||
@@ -1117,8 +1117,8 @@
         /**
          * Calculate scale of the 3D view. That is required to
          * fit chart's 3D projection into the actual plotting area. Reported as #4933.
-         * @notice This function should ideally take the plot values instead of a chart object, 
-         *         but since the chart object is needed for perspective it is not practical. 
+         * @notice This function should ideally take the plot values instead of a chart object,
+         *         but since the chart object is needed for perspective it is not practical.
          *         Possible to make both getScale and perspective more logical and also immutable.
          * @param  {Object} chart Chart object
          * @param  {Number} chart.plotLeft
@@ -1231,7 +1231,7 @@
                  * `highcharts-3d.js`, found in the download package or online at
                  * [code.highcharts.com/highcharts-3d.js](http://code.highcharts.com/highcharts-
                  * 3d.js).
-                 * 
+                 *
                  * @since 4.0
                  * @product highcharts
                  */
@@ -1239,7 +1239,7 @@
 
                     /**
                      * Wether to render the chart using the 3D functionality.
-                     * 
+                     *
                      * @type {Boolean}
                      * @default false
                      * @since 4.0
@@ -1249,7 +1249,7 @@
 
                     /**
                      * One of the two rotation angles for the chart.
-                     * 
+                     *
                      * @type {Number}
                      * @default 0
                      * @since 4.0
@@ -1259,7 +1259,7 @@
 
                     /**
                      * One of the two rotation angles for the chart.
-                     * 
+                     *
                      * @type {Number}
                      * @default 0
                      * @since 4.0
@@ -1269,7 +1269,7 @@
 
                     /**
                      * The total depth of the chart.
-                     * 
+                     *
                      * @type {Number}
                      * @default 100
                      * @since 4.0
@@ -1280,7 +1280,7 @@
                     /**
                      * Whether the 3d box should automatically adjust to the chart plot
                      * area.
-                     * 
+                     *
                      * @type {Boolean}
                      * @default true
                      * @since 4.2.4
@@ -1292,7 +1292,7 @@
                      * Defines the distance the viewer is standing in front of the chart,
                      * this setting is important to calculate the perspective effect
                      * in column and scatter charts. It is not used for 3D pie charts.
-                     * 
+                     *
                      * @type {Number}
                      * @default 100
                      * @since 4.0
@@ -1303,7 +1303,7 @@
                     /**
                      * Set it to `"auto"` to automatically move the labels to the best
                      * edge.
-                     * 
+                     *
                      * @validvalue [null, "auto"]
                      * @type {String}
                      * @default null
@@ -1315,7 +1315,7 @@
                     /**
                      * Provides the option to draw a frame around the charts by defining
                      * a bottom, front and back panel.
-                     * 
+                     *
                      * @since 4.0
                      * @product highcharts
                      */
@@ -1333,14 +1333,14 @@
 
                         /**
                          * The bottom of the frame around a 3D chart.
-                         * 
+                         *
                          * @since 4.0
                          * @product highcharts
                          */
 
                         /**
                          * The color of the panel.
-                         * 
+                         *
                          * @type {Color}
                          * @default transparent
                          * @since 4.0
@@ -1350,7 +1350,7 @@
 
                         /**
                          * The thickness of the panel.
-                         * 
+                         *
                          * @type {Number}
                          * @default 1
                          * @since 4.0
@@ -1363,7 +1363,7 @@
                          * `"auto"` to display only the frames behind the data, and `"default"`
                          * to display faces behind the data based on the axis layout, ignoring
                          * the point of view.
-                         * 
+                         *
                          * @validvalue ["default", "auto", true, false]
                          * @type {Boolean|String}
                          * @sample {highcharts} highcharts/3d/scatter-frame/ Auto frames
@@ -2867,9 +2867,9 @@
         /**
          * Note: As of v5.0.12, `frame.left` or `frame.right` should be used
          * instead.
-         * 
+         *
          * The side for the frame around a 3D chart.
-         * 
+         *
          * @since 4.0
          * @product highcharts
          * @apioption chart.options3d.frame.side
@@ -2877,7 +2877,7 @@
 
         /**
          * The color of the panel.
-         * 
+         *
          * @type {Color}
          * @default transparent
          * @since 4.0
@@ -2887,7 +2887,7 @@
 
         /**
          * The thickness of the panel.
-         * 
+         *
          * @type {Number}
          * @default 1
          * @since 4.0
@@ -2940,7 +2940,7 @@
                  * - `'ortho'`: Rotated text along the axis direction so that the labels
                  * 	 are orthogonal to the axis. This is very similar to `'flap'`, but
                  * 	 prevents skewing the labels (X and Y scaling are still present).
-                 * 
+                 *
                  * @validvalue ['offset', 'chart', 'flap', 'ortho']
                  * @sample highcharts/3d/skewed-labels/ Skewed labels
                  * @since 5.0.15
@@ -2949,13 +2949,13 @@
                 position3d: 'offset',
 
                 /**
-                 * If enabled, the axis labels will skewed to follow the perspective. 
-                 * 
+                 * If enabled, the axis labels will skewed to follow the perspective.
+                 *
                  * This will fix overlapping labels and titles, but texts become less
                  * legible due to the distortion.
-                 * 
+                 *
                  * The final appearance depends heavily on `labels.position3d`.
-                 * 
+                 *
                  * @since 5.0.15
                  * @sample highcharts/3d/skewed-labels/ Skewed labels
                  * @product highcharts
@@ -2978,8 +2978,8 @@
                  * - `'ortho'`: Rotated text along the axis direction so that the labels
                  *   are orthogonal to the axis. This is very similar to `'flap'`, but
                  *   prevents skewing the labels (X and Y scaling are still present).
-                 * - `null`: Will use the config from `labels.position3d`
-                 * 
+                 * - `null`: Will use the Config from `labels.position3d`
+                 *
                  * @validvalue ['offset', 'chart', 'flap', 'ortho', null]
                  * @type {String}
                  * @since 5.0.15
@@ -2990,14 +2990,14 @@
 
                 /**
                  * If enabled, the axis title will skewed to follow the perspective.
-                 * 
+                 *
                  * This will fix overlapping labels and titles, but texts become less
                  * legible due to the distortion.
-                 * 
+                 *
                  * The final appearance depends heavily on `title.position3d`.
-                 * 
-                 * A `null` value will use the config from `labels.skew3d`.
-                 * 
+                 *
+                 * A `null` value will use the Config from `labels.skew3d`.
+                 *
                  * @validvalue [false, true, null]
                  * @type {Boolean}
                  * @sample highcharts/3d/skewed-labels/ Skewed labels
@@ -3654,7 +3654,7 @@
 
         /**
          * Depth of the columns in a 3D column chart. Requires `highcharts-3d.js`.
-         * 
+         *
          * @type {Number}
          * @default 25
          * @since 4.0
@@ -3665,7 +3665,7 @@
         /**
          * 3D columns only. The color of the edges. Similar to `borderColor`,
          *  except it defaults to the same color as the column.
-         * 
+         *
          * @type {Color}
          * @product highcharts
          * @apioption plotOptions.column.edgeColor
@@ -3673,7 +3673,7 @@
 
         /**
          * 3D columns only. The width of the colored edges.
-         * 
+         *
          * @type {Number}
          * @default 1
          * @product highcharts
@@ -3683,7 +3683,7 @@
         /**
          * The spacing between columns on the Z Axis in a 3D chart. Requires
          * `highcharts-3d.js`.
-         * 
+         *
          * @type {Number}
          * @default 1
          * @since 4.0
@@ -3810,7 +3810,7 @@
                             }
                         });
 
-                    } else { // run the animation				
+                    } else { // run the animation
                         each(series.data, function(point) {
                             if (point.y !== null) {
                                 point.shapeArgs.height = point.height;
@@ -3851,7 +3851,7 @@
         });
 
         /*
-         * When series is not added to group it is needed to change 
+         * When series is not added to group it is needed to change
          * setVisible method to allow correct Legend funcionality
          * This wrap is basing on pie chart series
          */
@@ -4023,7 +4023,7 @@
          * (c) 2010-2017 Torstein Honsi
          *
          * 3D pie series
-         * 
+         *
          * License: www.highcharts.com/license
          */
         /* eslint max-len: 0 */
@@ -4037,7 +4037,7 @@
 
         /**
          * The thickness of a 3D pie. Requires `highcharts-3d.js`
-         * 
+         *
          * @type {Number}
          * @default 0
          * @since 4.0
@@ -4238,7 +4238,7 @@
          *         Simple 3D scatter
          * @sample {highcharts} highcharts/demo/3d-scatter-draggable
          *         Draggable 3d scatter
-         * 
+         *
          * @extends {plotOptions.scatter}
          * @product highcharts
          * @optionparent plotOptions.scatter3d
@@ -4285,12 +4285,12 @@
         /**
          * A `scatter3d` series. If the [type](#series.scatter3d.type) option is
          * not specified, it is inherited from [chart.type](#chart.type).
-         * 
+         *
          * For options that apply to multiple series, it is recommended to add
          * them to the [plotOptions.series](#plotOptions.series) options structure.
          * To apply to all series of this specific type, apply it to [plotOptions.
          * scatter3d](#plotOptions.scatter3d).
-         * 
+         *
          * @type {Object}
          * @extends series,plotOptions.scatter3d
          * @product highcharts
@@ -4300,11 +4300,11 @@
         /**
          * An array of data points for the series. For the `scatter3d` series
          * type, points can be given in the following ways:
-         * 
+         *
          * 1.  An array of arrays with 3 values. In this case, the values correspond
          * to `x,y,z`. If the first value is a string, it is applied as the name
          * of the point, and the `x` value is inferred.
-         * 
+         *
          *  ```js
          *     data: [
          *         [0, 0, 1],
@@ -4312,13 +4312,13 @@
          *         [2, 9, 2]
          *     ]
          *  ```
-         * 
+         *
          * 3.  An array of objects with named values. The objects are point
          * configuration objects as seen below. If the total number of data
          * points exceeds the series'
          * [turboThreshold](#series.scatter3d.turboThreshold), this option is not
          * available.
-         * 
+         *
          *  ```js
          *     data: [{
          *         x: 1,
@@ -4334,7 +4334,7 @@
          *         color: "#FF00FF"
          *     }]
          *  ```
-         * 
+         *
          * @type {Array<Object|Array>}
          * @extends series.scatter.data
          * @sample {highcharts} highcharts/chart/reflow-true/
@@ -4346,14 +4346,14 @@
          * @sample {highcharts} highcharts/series/data-array-of-name-value/
          *         Arrays of point.name and y
          * @sample {highcharts} highcharts/series/data-array-of-objects/
-         *         Config objects    
+         *         Config objects
          * @product highcharts
          * @apioption series.scatter3d.data
          */
 
         /**
          * The z value for each data point.
-         * 
+         *
          * @type {Number}
          * @product highcharts
          * @apioption series.scatter3d.data.z

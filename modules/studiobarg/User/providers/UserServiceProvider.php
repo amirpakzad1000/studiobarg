@@ -21,7 +21,7 @@ class UserServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../DataBase/Migrations');
 
         Factory::guessFactoryNamesUsing(function ($modelName) {
-            return 'studiobarg\\User\\Database\\Factories\\' . class_basename($modelName) . 'Factory';
+            return 'Database\\Factories\\' . class_basename($modelName) . 'Factory';
         });
     }
 }

@@ -1,6 +1,7 @@
 <?php
-use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'studiobarg\Category\Http\Controllers','middleware'=>['web','auth','verified']],function ($router){
-    $router->resource('categories', CategoryController::class);
+use Studiobarg\Category\Http\Controllers\CategoryController;
+
+Route::middleware(['web', 'auth', 'verified'])->group(function () {
+    Route::resource('categories', CategoryController::class);
 });

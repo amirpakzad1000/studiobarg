@@ -1,13 +1,13 @@
 <?php
 
-use studiobarg\User\HTTP\Controllers\Auth\AuthenticatedSessionController;
-use studiobarg\User\HTTP\Controllers\Auth\EmailVerificationNotificationController;
-use studiobarg\User\HTTP\Controllers\Auth\EmailVerificationPromptController;
-use studiobarg\User\HTTP\Controllers\Auth\NewPasswordController;
-use studiobarg\User\HTTP\Controllers\Auth\PasswordResetLinkController;
-use studiobarg\User\HTTP\Controllers\Auth\RegisteredUserController;
-use studiobarg\User\HTTP\Controllers\Auth\VerifyEmailController;
-use studiobarg\User\HTTP\Controllers\ProfileController;
+use studiobarg\User\Http\Controllers\Auth\AuthenticatedSessionController;
+use studiobarg\User\Http\Controllers\Auth\EmailVerificationNotificationController;
+use studiobarg\User\Http\Controllers\Auth\EmailVerificationPromptController;
+use studiobarg\User\Http\Controllers\Auth\NewPasswordController;
+use studiobarg\User\Http\Controllers\Auth\PasswordResetLinkController;
+use studiobarg\User\Http\Controllers\Auth\RegisteredUserController;
+use studiobarg\User\Http\Controllers\Auth\VerifyEmailController;
+use studiobarg\User\Http\Controllers\ProfileController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -16,9 +16,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group([
-    'namespace' => 'studiobarg\User\HTTP\Controllers',
-    'middleware' => ['web']], function ($router) {
-
+    'middleware' => ['web']], function () {
 
     //login logout
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');

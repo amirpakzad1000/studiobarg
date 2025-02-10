@@ -9344,7 +9344,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
  * WYSIHTML5 Editor
  *
  * @param {Element} textareaElement Reference to the textarea which should be turned into a rich text interface
- * @param {Object} [config] See defaultConfig object below for explanation of each individual config option
+ * @param {Object} [Config] See defaultConfig object below for explanation of each individual Config option
  *
  * @events
  *    load

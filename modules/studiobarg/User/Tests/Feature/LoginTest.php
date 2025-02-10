@@ -11,9 +11,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
-    /**
-     * A basic feature test example.
-     */
+
     public function setUp(): void
     {
         parent::setUp();

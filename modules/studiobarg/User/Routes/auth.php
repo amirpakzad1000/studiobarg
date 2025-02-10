@@ -1,15 +1,15 @@
 <?php
 /*
 use Illuminate\Support\Facades\Route;
-use studiobarg\User\HTTP\Controllers\Auth\AuthenticatedSessionController;
-use studiobarg\User\HTTP\Controllers\Auth\ConfirmablePasswordController;
-use studiobarg\User\HTTP\Controllers\Auth\EmailVerificationNotificationController;
-use studiobarg\User\HTTP\Controllers\Auth\EmailVerificationPromptController;
-use studiobarg\User\HTTP\Controllers\Auth\NewPasswordController;
-use studiobarg\User\HTTP\Controllers\Auth\PasswordController;
-use studiobarg\User\HTTP\Controllers\Auth\PasswordResetLinkController;
-use studiobarg\User\HTTP\Controllers\Auth\RegisteredUserController;
-use studiobarg\User\HTTP\Controllers\Auth\VerifyEmailController;
+use studiobarg\User\Http\Controllers\Auth\AuthenticatedSessionController;
+use studiobarg\User\Http\Controllers\Auth\ConfirmablePasswordController;
+use studiobarg\User\Http\Controllers\Auth\EmailVerificationNotificationController;
+use studiobarg\User\Http\Controllers\Auth\EmailVerificationPromptController;
+use studiobarg\User\Http\Controllers\Auth\NewPasswordController;
+use studiobarg\User\Http\Controllers\Auth\PasswordController;
+use studiobarg\User\Http\Controllers\Auth\PasswordResetLinkController;
+use studiobarg\User\Http\Controllers\Auth\RegisteredUserController;
+use studiobarg\User\Http\Controllers\Auth\VerifyEmailController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])

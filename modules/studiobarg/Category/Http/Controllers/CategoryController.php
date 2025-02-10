@@ -1,64 +1,54 @@
 <?php
+
 namespace Studiobarg\Category\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use studiobarg\Category\Http\Requests\CategoryRequest;
+use studiobarg\Category\Repository\categoryRepo;
+use studiobarg\Category\Responses\AjaxResponse;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public $repo;
+
+    public function __construct(categoryRepo $categoryRepo)
+    {
+        $this->repo = $categoryRepo;
+    }//End Method
+
     public function index()
     {
-        return view('Category::index');
-    }
+        $categories = $this->repo->all();
+        return view('Category::index', compact('categories'));
+    }//End Method
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(CategoryRequest $request)
     {
-        //
-    }
+        $this->repo->store($request);
+        return back();
+    }//End Method
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function edit($categoryId)
     {
-        //
-    }
+        $category = $this->repo->findById($categoryId);
+        $categories = $this->repo->allExceptById($categoryId);
+        return view('Category::edit', compact('category', 'categories'));
+    }//End Method
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update($categoryId, Request $request)
     {
-        //
-    }
+        $this->repo->update($categoryId, $request);
+        return back();
+    }//End Method
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($categoryId)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+        try {
+            $this->repo->delete($categoryId);
+            return AjaxResponse::successResponse();
+        } catch (\Exception $exception) {
+           return AjaxResponse::errorResponse($exception);
+        }
+    }//End Method
 }

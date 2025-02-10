@@ -751,7 +751,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Handle the incoming HTTP request and send the response to the browser.
+         * Handle the incoming Http request and send the response to the browser.
          *
          * @param \Illuminate\Http\Request $request
          * @return void
@@ -2474,7 +2474,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Attempt to authenticate using HTTP Basic Auth.
+         * Attempt to authenticate using Http Basic Auth.
          *
          * @param string $field
          * @param array $extraConditions
@@ -2489,7 +2489,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Perform a stateless HTTP Basic login attempt.
+         * Perform a stateless Http Basic login attempt.
          *
          * @param string $field
          * @param array $extraConditions
@@ -9573,7 +9573,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Deny with a HTTP status code.
+         * Deny with a Http status code.
          *
          * @param int $status
          * @param string|null $message
@@ -9588,7 +9588,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Deny with a 404 HTTP status code.
+         * Deny with a 404 Http status code.
          *
          * @param string|null $message
          * @param int|null $code
@@ -13446,7 +13446,7 @@ namespace Illuminate\Support\Facades {
      */
     class Request {
         /**
-         * Create a new Illuminate HTTP request from server variables.
+         * Create a new Illuminate Http request from server variables.
          *
          * @return static
          * @static
@@ -13656,7 +13656,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Get the HTTP host being requested.
+         * Get the Http host being requested.
          *
          * @return string
          * @static
@@ -13668,7 +13668,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Get the scheme and HTTP host.
+         * Get the scheme and Http host.
          *
          * @return string
          * @static
@@ -14162,7 +14162,7 @@ namespace Illuminate\Support\Facades {
          * over the other information (server and parameters).
          *
          * @param string $uri The URI
-         * @param string $method The HTTP method
+         * @param string $method The Http method
          * @param array $parameters The query (GET) or request (POST) parameters
          * @param array $cookies The request cookies ($_COOKIE)
          * @param array $files The request files ($_FILES)
@@ -14287,15 +14287,15 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Enables support for the _method request parameter to determine the intended HTTP method.
+         * Enables support for the _method request parameter to determine the intended Http method.
          *
          * Be warned that enabling this feature might lead to CSRF issues in your code.
          * Check that you are using CSRF tokens when required.
-         * If the HTTP method parameter override is enabled, an html-form with method "POST" can be altered
+         * If the Http method parameter override is enabled, an html-form with method "POST" can be altered
          * and used to send a "PUT" or "DELETE" request via the _method request parameter.
          * If these methods are not protected against CSRF, this presents a possible vulnerability.
          *
-         * The HTTP method can only be overridden when the real HTTP method is POST.
+         * The Http method can only be overridden when the real Http method is POST.
          *
          * @static
          */
@@ -14538,7 +14538,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Returns the HTTP host being requested.
+         * Returns the Http host being requested.
          *
          * The port name will be appended to the host if it's non-standard.
          *
@@ -14565,7 +14565,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Gets the scheme and HTTP host.
+         * Gets the scheme and Http host.
          *
          * If the URL was called with basic authentication, the user
          * and the password are not added to the generated string.
@@ -14694,10 +14694,10 @@ namespace Illuminate\Support\Facades {
         /**
          * Gets the request "intended" method.
          *
-         * If the X-HTTP-Method-Override header is set, and if the method is a POST,
-         * then it is used to determine the "real" intended HTTP method.
+         * If the X-Http-Method-Override header is set, and if the method is a POST,
+         * then it is used to determine the "real" intended Http method.
          *
-         * The _method request parameter can also be used to determine the HTTP method,
+         * The _method request parameter can also be used to determine the Http method,
          * but only if enableHttpMethodParameterOverride() has been called.
          *
          * The method is always an uppercased string.
@@ -14990,10 +14990,10 @@ namespace Illuminate\Support\Facades {
         /**
          * Gets the preferred format for the response by inspecting, in the following order:
          *   * the request format set using setRequestFormat;
-         *   * the values of the Accept HTTP header.
+         *   * the values of the Accept Http header.
          *
          * Note that if you use this method, you should send the "Vary: Accept" header
-         * in the response to prevent any issues with intermediary HTTP caches.
+         * in the response to prevent any issues with intermediary Http caches.
          *
          * @static
          */
@@ -15072,7 +15072,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Returns true if the request is an XMLHttpRequest.
          *
-         * It works if your JavaScript library sets an X-Requested-With HTTP header.
+         * It works if your JavaScript library sets an X-Requested-With Http header.
          * It is known to work with common JavaScript frameworks:
          *
          * @see https://wikipedia.org/wiki/List_of_Ajax_frameworks#JavaScript
@@ -19062,8 +19062,8 @@ namespace Illuminate\Support\Facades {
      * @method static \League\Flysystem\DirectoryListing listContents(string $location, bool $deep = false)
      * @method static int fileSize(string $path)
      * @method static string visibility(string $path)
-     * @method static void write(string $location, string $contents, array $config = [])
-     * @method static void createDirectory(string $location, array $config = [])
+     * @method static void write(string $location, string $contents, array $Config = [])
+     * @method static void createDirectory(string $location, array $Config = [])
      * @see \Illuminate\Filesystem\FilesystemManager
      */
     class Storage {

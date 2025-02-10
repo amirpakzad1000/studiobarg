@@ -2620,7 +2620,7 @@
                     });
                     key = key.join(',');
 
-                    // Check if a gradient object with the same config object is created
+                    // Check if a gradient object with the same Config object is created
                     // within this renderer
                     if (gradients[key]) {
                         id = gradients[key].attr('id');
@@ -9182,8 +9182,8 @@
             },
 
             /**
-             * The plotOptions is a wrapper object for config objects for each series
-             * type. The config objects for each series can also be overridden for
+             * The plotOptions is a wrapper object for Config objects for each series
+             * type. The Config objects for each series can also be overridden for
              * each series item as given in the series array.
              *
              * Configuration options for the series are given in three levels. Options
@@ -13274,7 +13274,7 @@
             },
 
             /**
-             * The default label formatter. The context is a special config object for
+             * The default label formatter. The context is a special Config object for
              * the label. In apps, use the {@link
              * https://api.highcharts.com/highcharts/xAxis.labels.formatter|
              * labels.formatter} instead except when a modification is needed.
@@ -20998,7 +20998,7 @@
             },
 
             /**
-             * Create the Axis instances based on the config options.
+             * Create the Axis instances based on the Config options.
              *
              * @private
              */
@@ -22644,7 +22644,7 @@
              * Transform number or array configs into objects. Used internally to unify
              * the different configuration formats for points. For example, a simple
              * number `10` in a line series will be transformed to `{ y: 10 }`, and an
-             * array config like `[1, 10]` in a scatter series will be transformed to
+             * array Config like `[1, 10]` in a scatter series will be transformed to
              * `{ x: 1, y: 10 }`.
              *
              * @param  {Number|Array|Object} options
@@ -22939,13 +22939,13 @@
          * point configuration array, or as a `name` property in the configuration:
          *
          * @example
-         * // Array config
+         * // Array Config
          * data: [
          *     ['John', 1],
          *     ['Jane', 2]
          * ]
          *
-         * // Object config
+         * // Object Config
          * data: [{
          * 	   name: 'John',
          * 	   y: 1
@@ -23055,7 +23055,7 @@
          *
          * The data in the series is stored in various arrays.
          *
-         * - First, `series.options.data` contains all the original config options for
+         * - First, `series.options.data` contains all the original Config options for
          * each point whether added by options or methods like `series.addPoint`.
          * - Next, `series.data` contains those values converted to points, but in case
          * the series data length exceeds the `cropThreshold`, or if the data is
@@ -28560,7 +28560,7 @@
              * option instead. With multiple axes, the `offset` is dynamically adjusted.
              *
              * @param  {SeriesOptions} options
-             *         The config options for the series.
+             *         The Config options for the series.
              * @param  {Boolean} [redraw=true]
              *         Whether to redraw the chart after adding.
              * @param  {AnimationOptions} animation
@@ -29068,7 +29068,7 @@
                     i = point.index;
                     series.updateParallelArrays(point, i);
 
-                    // Record the options to options.data. If the old or the new config
+                    // Record the options to options.data. If the old or the new Config
                     // is an object, use point options, otherwise use raw options
                     // (#4701, #4916).
                     seriesOptions.data[i] = (

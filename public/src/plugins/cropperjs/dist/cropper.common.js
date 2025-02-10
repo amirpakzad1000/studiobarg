@@ -2970,7 +2970,7 @@ var methods = {
 
   /**
    * Get a canvas drawn the cropped image.
-   * @param {Object} [options={}] - The config options.
+   * @param {Object} [options={}] - The Config options.
    * @returns {HTMLCanvasElement} - The result canvas.
    */
   getCroppedCanvas: function getCroppedCanvas() {
