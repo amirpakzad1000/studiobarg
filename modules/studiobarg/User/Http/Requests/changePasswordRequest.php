@@ -1,6 +1,6 @@
 <?php
 
-namespace studiobarg\User\HTTP\Requests;
+namespace studiobarg\User\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use studiobarg\User\Rules\validPassword;

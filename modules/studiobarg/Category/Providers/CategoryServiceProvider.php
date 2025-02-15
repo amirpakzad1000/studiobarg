@@ -12,7 +12,7 @@ class CategoryServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'Category');
         $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
         Factory::guessFactoryNamesUsing(function ($modelName) {
-            return 'Database\\Factories\\' . class_basename($modelName) . 'Factory';
+            return 'Databases\\Factories\\' . class_basename($modelName) . 'Factory';
         });
     }
 
@@ -20,8 +20,8 @@ class CategoryServiceProvider extends ServiceProvider
     {
            config()->set('sidebar.items.categories', [
                'url' => url('/categories'),
-               'icon' => 'micon bi bi-textarea-resize',
-               'title' => 'Categories',
+               'icon' => 'micon dw dw-layers',
+               'title' => 'دسته‌بندی‌ها',
            ]);
     }
 }

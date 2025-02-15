@@ -1,6 +1,6 @@
 <?php
 
-namespace studiobarg\User\HTTP\Controllers\Auth;
+namespace studiobarg\User\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;

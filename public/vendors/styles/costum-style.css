@@ -1,0 +1,72 @@
+
+body {
+    direction: rtl;
+}
+
+.header {
+    direction: ltr;
+}
+
+.alert-error {
+    font-weight: 400;
+    font-size: 15px;
+    color: darkred;
+    padding-right: 3px;
+}
+
+.sidebar-menu .dropdown-toggle {
+    padding: 12px 54px 14px 0;
+}
+
+.sidebar-menu .dropdown-toggle .micon {
+    right: 10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    left: 10px;
+}
+
+.select2-container {
+    text-align: right;
+}
+
+.custom-file-input, .sidebar-light .sidebar-menu .dropdown-toggle {
+    text-align: right;
+}
+
+.custom-file-label::after {
+    left: 0;
+    right: auto;
+}
+
+.custom-file-label {
+    text-align: right;
+}
+
+.sidebar-menu {
+    text-align: right;
+}
+
+.form-group {
+    text-align: right;
+}
+
+.custom-control-input {
+    right: 0;
+}
+
+.custom-control {
+    padding-right: 35px;
+}
+
+.custom-control-label::before, .custom-control-label::after {
+    right: -30px;
+}
+table.dataTable {
+    text-align: right;
+}
+
+
+@media (min-width: 1301px) and (max-width: 1400px) {
+
+}

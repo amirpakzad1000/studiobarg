@@ -3,22 +3,24 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use studiobarg\User\Models\User;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Databases\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+
+    public static $seeders = [];
     public function run(): void
     {
-        // User::factory(10)->create();
+        foreach (self::$seeders as $seeder) {
+            $this->call($seeder);
+        }
+
+      /* User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-        ]);
+        ]);*/
     }
 }

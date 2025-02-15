@@ -6,6 +6,12 @@ use studiobarg\Category\Models\Category;
 
 class categoryRepo
 {
+
+    public function all()
+    {
+        return Category::all();
+    }//End Method
+
     public function store($values)
     {
         return Category::create([
@@ -25,11 +31,6 @@ class categoryRepo
         return $this->all()->filter(function ($category) use ($id) {
             return $category->id != $id;
         });
-    }//End Method
-
-    public function all()
-    {
-        return Category::all();
     }//End Method
 
     public function update($id, $values)

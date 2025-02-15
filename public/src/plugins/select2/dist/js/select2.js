@@ -5056,8 +5056,8 @@ S2.define('select2/options',[
     if (this.options.language == null) {
       if ($e.prop('lang')) {
         this.options.language = $e.prop('lang').toLowerCase();
-      } else if ($e.closest('[lang]').prop('lang')) {
-        this.options.language = $e.closest('[lang]').prop('lang');
+      } else if ($e.closest('[Lang]').prop('lang')) {
+        this.options.language = $e.closest('[Lang]').prop('lang');
       }
     }
 

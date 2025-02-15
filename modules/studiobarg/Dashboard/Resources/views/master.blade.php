@@ -16,7 +16,7 @@
 </div>--}}
 
 @include('Dashboard::layout.header')
-@include('Dashboard::layout.sidbar')
+@include('Dashboard::layout.sidebar')
 
 <div class="mobile-menu-overlay"></div>
 

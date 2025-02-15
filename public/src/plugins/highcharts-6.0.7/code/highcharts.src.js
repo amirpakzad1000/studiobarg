@@ -1367,9 +1367,9 @@
          * @param {Number} decimals - The amount of decimals. A value of -1 preserves
          *        the amount in the input number.
          * @param {String} [decimalPoint] - The decimal point, defaults to the one given
-         *        in the lang options, or a dot.
+         *        in the Lang options, or a dot.
          * @param {String} [thousandsSep] - The thousands separator, defaults to the one
-         *        given in the lang options, or a space character.
+         *        given in the Lang options, or a space character.
          * @returns {String} The formatted number.
          *
          * @sample highcharts/members/highcharts-numberformat/ Custom number format
@@ -7811,13 +7811,13 @@
 
                 /**
                  * Short week days, starting Sunday. If not specified, Highcharts uses
-                 * the first three letters of the `lang.weekdays` option.
+                 * the first three letters of the `Lang.weekdays` option.
                  *
                  * @type {Array<String>}
-                 * @sample highcharts/lang/shortweekdays/
+                 * @sample highcharts/Lang/shortweekdays/
                  *         Finnish two-letter abbreviations
                  * @since 4.2.4
-                 * @apioption lang.shortWeekdays
+                 * @apioption Lang.shortWeekdays
                  */
 
                 /**
@@ -7827,7 +7827,7 @@
                  * @type {String}
                  * @since 4.1.8
                  * @product highcharts highstock
-                 * @apioption lang.invalidDate
+                 * @apioption Lang.invalidDate
                  */
 
                 /**
@@ -7847,9 +7847,9 @@
                  * to `null` disables shortening altogether.
                  *
                  * @type {Array<String>}
-                 * @sample {highcharts} highcharts/lang/numericsymbols/
+                 * @sample {highcharts} highcharts/Lang/numericsymbols/
                  *         Replacing the symbols with text
-                 * @sample {highstock} highcharts/lang/numericsymbols/
+                 * @sample {highstock} highcharts/Lang/numericsymbols/
                  *         Replacing the symbols with text
                  * @default [ "k" , "M" , "G" , "T" , "P" , "E"]
                  * @since 2.3.0
@@ -7857,16 +7857,16 @@
                 numericSymbols: ['k', 'M', 'G', 'T', 'P', 'E'],
 
                 /**
-                 * The magnitude of [numericSymbols](#lang.numericSymbol) replacements.
+                 * The magnitude of [numericSymbols](#Lang.numericSymbol) replacements.
                  * Use 10000 for Japanese, Korean and various Chinese locales, which
                  * use symbols for 10^4, 10^8 and 10^12.
                  *
                  * @type {Number}
-                 * @sample highcharts/lang/numericsymbolmagnitude/
+                 * @sample highcharts/Lang/numericsymbolmagnitude/
                  *         10000 magnitude for Japanese
                  * @default 1000
                  * @since 5.0.3
-                 * @apioption lang.numericSymbolMagnitude
+                 * @apioption Lang.numericSymbolMagnitude
                  */
 
                 /**
@@ -7905,7 +7905,7 @@
 
             /**
              * Global options that don't apply to each chart. These options, like
-             * the `lang` options, must be set using the `Highcharts.setOptions`
+             * the `Lang` options, must be set using the `Highcharts.setOptions`
              * method.
              *
              * <pre>Highcharts.setOptions({
@@ -9895,7 +9895,7 @@
              * utility for developers to communicate to the end auth that something
              * is going on, for example while retrieving new data via an XHR connection.
              * The "Loading..." text itself is not part of this configuration
-             * object, but part of the `lang` object.
+             * object, but part of the `Lang` object.
              *
              */
             loading: {

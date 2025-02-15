@@ -3741,7 +3741,7 @@ wysihtml5.browser = (function() {
      * Check whether a given object exists in an array
      *
      * @example
-     *    wysihtml5.lang.array([1, 2]).contains(1);
+     *    wysihtml5.Lang.array([1, 2]).contains(1);
      *    // => true
      */
     contains: function(needle) {
@@ -3759,7 +3759,7 @@ wysihtml5.browser = (function() {
      * Substract one array from another
      *
      * @example
-     *    wysihtml5.lang.array([1, 2, 3, 4]).without([3, 4]);
+     *    wysihtml5.Lang.array([1, 2, 3, 4]).without([3, 4]);
      *    // => [1, 2]
      */
     without: function(arrayToSubstract) {
@@ -3780,7 +3780,7 @@ wysihtml5.browser = (function() {
      *
      * Following will convert a Live NodeList to a proper Array
      * @example
-     *    var childNodes = wysihtml5.lang.array(document.body.childNodes).get();
+     *    var childNodes = wysihtml5.Lang.array(document.body.childNodes).get();
      */
     get: function() {
       var i        = 0,
@@ -3793,7 +3793,7 @@ wysihtml5.browser = (function() {
     }
   };
 };wysihtml5.lang.Dispatcher = Base.extend(
-  /** @scope wysihtml5.lang.Dialog.prototype */ {
+  /** @scope wysihtml5.Lang.Dialog.prototype */ {
   observe: function(eventName, handler) {
     this.events = this.events || {};
     this.events[eventName] = this.events[eventName] || [];
@@ -3839,7 +3839,7 @@ wysihtml5.browser = (function() {
   return {
     /**
      * @example
-     *    wysihtml5.lang.object({ foo: 1, bar: 1 }).merge({ bar: 2, baz: 3 }).get();
+     *    wysihtml5.Lang.object({ foo: 1, bar: 1 }).merge({ bar: 2, baz: 3 }).get();
      *    // => { foo: 1, bar: 2, baz: 3 }
      */
     merge: function(otherObj) {
@@ -3855,7 +3855,7 @@ wysihtml5.browser = (function() {
 
     /**
      * @example
-     *    wysihtml5.lang.object({ foo: 1 }).clone();
+     *    wysihtml5.Lang.object({ foo: 1 }).clone();
      *    // => { foo: 1 }
      */
     clone: function() {
@@ -3869,7 +3869,7 @@ wysihtml5.browser = (function() {
 
     /**
      * @example
-     *    wysihtml5.lang.object([]).isArray();
+     *    wysihtml5.Lang.object([]).isArray();
      *    // => true
      */
     isArray: function() {
@@ -3884,7 +3884,7 @@ wysihtml5.browser = (function() {
     return {
       /**
        * @example
-       *    wysihtml5.lang.string("   foo   ").trim();
+       *    wysihtml5.Lang.string("   foo   ").trim();
        *    // => "foo"
        */
       trim: function() {
@@ -3893,7 +3893,7 @@ wysihtml5.browser = (function() {
 
       /**
        * @example
-       *    wysihtml5.lang.string("Hello #{name}").interpolate({ name: "Christopher" });
+       *    wysihtml5.Lang.string("Hello #{name}").interpolate({ name: "Christopher" });
        *    // => "Hello Christopher"
        */
       interpolate: function(vars) {
@@ -3905,7 +3905,7 @@ wysihtml5.browser = (function() {
 
       /**
        * @example
-       *    wysihtml5.lang.string("Hello Tom").replace("Tom").with("Hans");
+       *    wysihtml5.Lang.string("Hello Tom").replace("Tom").with("Hans");
        *    // => "Hello Hans"
        */
       replace: function(search) {

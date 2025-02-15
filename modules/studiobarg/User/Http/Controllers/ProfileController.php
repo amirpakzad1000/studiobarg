@@ -1,6 +1,6 @@
 <?php
 
-namespace studiobarg\User\HTTP\Controllers;
+namespace studiobarg\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;

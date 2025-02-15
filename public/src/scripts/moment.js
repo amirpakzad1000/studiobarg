@@ -3400,7 +3400,7 @@ function locale (key) {
 }
 
 var lang = deprecate(
-    'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
+    'moment().Lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
     function (key) {
         if (key === undefined) {
             return this.localeData();
@@ -4057,7 +4057,7 @@ getSetGlobalLocale('en', {
 
 // Side effect imports
 
-hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
+hooks.lang = deprecate('moment.Lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
 hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
 
 var mathAbs = Math.abs;

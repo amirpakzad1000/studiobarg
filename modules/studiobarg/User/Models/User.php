@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use studiobarg\User\Notifications\ResetPasswordRequestNotification;
 use studiobarg\User\Notifications\VerifyMailNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasRoles;
     use HasFactory;
     use Notifiable;
+
     protected $fillable = [
         'name',
         'email',

@@ -1,6 +1,6 @@
 <?php
 
-namespace studiobarg\User\HTTP\Requests\Auth;
+namespace studiobarg\User\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;

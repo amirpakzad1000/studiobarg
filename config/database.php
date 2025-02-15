@@ -6,7 +6,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Database Connection Name
+    | Default Databases Connection Name
     |--------------------------------------------------------------------------
     |
     | Here you may specify which of the database connections below you wish
@@ -19,7 +19,7 @@ return [
     'default' => env('DB_CONNECTION', 'sqlite'),
     /*
     |--------------------------------------------------------------------------
-    | Database Connections
+    | Databases Connections
     |--------------------------------------------------------------------------
     |
     | Below are all of the database connections defined for your application.
