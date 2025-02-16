@@ -1,3 +1,3 @@
-<textarea placeholder="{{$placeholder}}" name="{{$name}}" id="" {{$attributes->merge(['class'=>'form-control'])}}
-         >{!! old($name) !!}</textarea>
+<textarea placeholder="{{$placeholder}}" name="{{$name}}" {{$attributes->merge(['class'=>'form-control'])}}>
+    {!! isset($value) ? $value : old($name) !!}</textarea>
 <x-validation-error field="{{$name}}"/>

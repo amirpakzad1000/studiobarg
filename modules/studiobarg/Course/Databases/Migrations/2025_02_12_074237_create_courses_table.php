@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('price',10);
             $table->string('percent',5);
             $table->enum('type',Course::$types);
-            $table->enum('status',Course::$statuses)->default('not-completed');
+            $table->enum('status',Course::$statuses);
+            $table->enum('confirmationStatus',Course::$confirmationStatuses);
             $table->longText('description')->nullable();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');

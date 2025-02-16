@@ -8,7 +8,7 @@ class AjaxResponse
     {
         return response()->json([
             'status' => 'success',
-            'message' => 'دسته‌بندی با موفقیت حذف شد.'
+            'message' => 'عملیات با موفقیت انجام شد'
         ], 200);
     }//End Method
 
@@ -16,7 +16,7 @@ class AjaxResponse
     {
         return response()->json([
             'status' => 'error',
-            'message' => 'مشکلی در حذف دسته‌بندی رخ داده است!'
+            'message' => 'مشکلی در عملیات رخ داده است!'
         ], 500);
     }//End Method7777
 }

@@ -22,9 +22,11 @@ class CourseRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $courseId = request()->route('course');
+
+        $rules = [
             'title' => 'required|string',
-            'slug' => 'required|string|unique:courses',
+            'slug' => 'required|string|min:3|max:100|unique:courses,slug,'. $courseId,
             'priority' => 'required|integer',
             'price' => 'required|numeric',
             'percent' => 'required|numeric',
@@ -35,6 +37,7 @@ class CourseRequest extends FormRequest
             'description' => 'nullable|string',
             'banner_id' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240'
         ];
+        return $rules;
     }
 
     public function attributes(): array

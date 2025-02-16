@@ -8,7 +8,7 @@ class UserRepo
 {
     public function findByEmail($email)
     {
-        return User::where('email', $email)->first();
+        return User::where('email', $email)->firstOrFail();
     }
 
     public function getTeacher()
