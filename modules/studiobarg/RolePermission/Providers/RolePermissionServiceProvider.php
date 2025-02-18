@@ -1,7 +1,9 @@
 <?php
 
 namespace studiobarg\RolePermission\Providers;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use studiobarg\RolePermission\Models\Permission;
 
 class RolePermissionServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,10 @@ class RolePermissionServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views/', 'RolePermissions');
         $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
+
+        Gate::before(function ($user) {
+            return $user->hasPermissionTo(Permission::PERMISSION_SUPER_ADMIN) ? true : null;
+        });
     }
 
 

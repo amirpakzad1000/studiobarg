@@ -17,19 +17,19 @@ class PasswordResetLinkController extends Controller
         return view('User::Front.auth.forgot-password');
     }
 
-    public function sendVerifyCodeEmail(SendResetPasswordVerifyCodeRequest $request)
+    public function sendVerifyCodeEmail(SendResetPasswordVerifyCodeRequest $request,UserRepo $userRepo): View
     {
-        $user = resolve(UserRepo::class)->findByEmail($request->email);
+        $user = $userRepo->findByEmail($request->email);
         if ($user && !VerifyCodeService::has($user->id)) {
             $user->sendResetPasswordRequestNotification();
         }
         return view('User::Front.auth.enter-verify-code-form');
     }
 
-    public function checkVerifyCode(resetPasswordVerifyCodeRequest $request)
+    public function checkVerifyCode(resetPasswordVerifyCodeRequest $request,UserRepo $userRepo)
     {
 
-        $user = resolve(UserRepo::class)->findByEmail($request->email);
+        $user = $userRepo->findByEmail($request->email);
 
         if ($user == null || !VerifyCodeService::check($user->id, $request->verify_code)) {
             return back()->withErrors(['verify_code' => 'کد وارد شده معتبر نمی باشد']);

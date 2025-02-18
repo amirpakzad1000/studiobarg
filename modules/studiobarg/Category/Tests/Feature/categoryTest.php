@@ -4,7 +4,10 @@ namespace studiobarg\Category\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\Permission\Models\Role;
 use studiobarg\Category\Models\Category;
+use studiobarg\Course\Databases\Seeder\RolePermissionTableSeeder;
+use studiobarg\RolePermission\Models\Permission;
 use studiobarg\User\Models\User;
 use Tests\TestCase;
 
@@ -13,20 +16,20 @@ class categoryTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    public function test_authenticated_user_can_see_categories_panel(): void
+    public function test_manage_categories_panel_permission_holder_can_see_categories_panel(): void
     {
-        //todo add permission
         $this->actionAdminAs();
-        $this->assertAuthenticated();
         $this->get(route('categories.index'))->assertOk();
-    }//End Method
+    } //End Method
 
-        private function actionAdminAs()
+    public function test_normal_user_can_not_see_categories_panel(): void
     {
-        $this->actingAs(User::factory()->create());
-    }//End Method
+        $this->actionUserAs();
+        $this->get(route('categories.index'))->assertStatus(403);
+    } //End Method
 
-    public function test_user_can_create_category(): void
+
+    public function test_user_Permitted_can_create_category(): void
     {
         $this->actionAdminAs();
         $this->createCategory();
@@ -35,7 +38,7 @@ class categoryTest extends TestCase
 
     public function test_user_can_update_category(): void
     {
-        $newTitle = "dfgdgfdgfdg";
+        $newTitle = "dfgdgfdgfffffffdg";
         $this->actionAdminAs();
         $this->createCategory();
         $this->assertEquals(1, Category::all()->count());
@@ -51,6 +54,18 @@ public function test_user_delete__category_item(): void
         $this->assertEquals(1, Category::all()->count());
         $this->delete(route('categories.destroy', 1))->assertOk();
     }
+
+    private function actionAdminAs()
+    {
+        $this->actingAs(User::factory()->create());
+        $this->seed(rolePermissionTableSeeder::class);
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_CATEGORIES);
+    }//End Method
+    private function actionUserAs()
+    {
+        $this->actingAs(User::factory()->create());
+        $this->seed(rolePermissionTableSeeder::class);
+    }//End Method
 
     private function createCategory()
     {

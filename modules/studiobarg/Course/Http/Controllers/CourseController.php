@@ -3,6 +3,7 @@
 namespace studiobarg\Course\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use studiobarg\Category\Repository\categoryRepo;
 use studiobarg\Category\Responses\AjaxResponse;
 use studiobarg\Course\Http\Requests\CourseRequest;
@@ -12,9 +13,10 @@ use studiobarg\User\Repositories\UserRepo;
 
 class CourseController extends Controller
 {
-
+    use AuthorizesRequests;
     public function index(CourseRepo $courseRepo)
     {
+        $this->authorize('manage', Course::class);
         $courses = $courseRepo->paginate();
         return view('Courses::index', compact('courses'));
     }//End method
@@ -22,6 +24,7 @@ class CourseController extends Controller
 
     public function create(UserRepo $userRepo, CategoryRepo $categoryRepo)
     {
+        $this->authorize('create', Course::class);
         $teachers = $userRepo->getTeacher();
         $categories = $categoryRepo->all();
         return view('Courses::create', compact('teachers', 'categories'));
@@ -31,7 +34,6 @@ class CourseController extends Controller
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
         $course = $courseRepo->store($request);
-
         if ($request->hasFile('banner_id')) {
             // افزودن تصویر اصلی به کالکشن 'images'
             $course->addMedia($request->file('banner_id'))
@@ -52,6 +54,7 @@ class CourseController extends Controller
     public function edit($id, CourseRepo $courseRepo, CategoryRepo $categoryRepo, UserRepo $userRepo)
     {
         $course = $courseRepo->fingById($id);
+        $this->authorize('edit', $course);
         $categories = $categoryRepo->all();
         $teachers = $userRepo->getTeacher();
 

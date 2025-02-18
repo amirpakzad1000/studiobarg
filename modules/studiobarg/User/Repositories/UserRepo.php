@@ -2,18 +2,19 @@
 
 namespace studiobarg\User\Repositories;
 
+use studiobarg\RolePermission\Models\Permission;
 use studiobarg\User\Models\User;
 
 class UserRepo
 {
     public function findByEmail($email)
     {
-        return User::where('email', $email)->firstOrFail();
+        return User::query()->where('email', $email)->first();
     }
 
     public function getTeacher()
     {
-        return User::role('teach')->get();
+        return User::role(Permission::PERMISSION_TEACH)->get();
     }
     public function findById($id)
     {

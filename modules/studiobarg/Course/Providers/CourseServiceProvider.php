@@ -3,8 +3,11 @@
 namespace studiobarg\Course\Providers;
 
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use studiobarg\Course\Databases\Seeder\RolePermissionTableSeeder;
+use studiobarg\Course\Models\Course;
+use studiobarg\Course\Policies\CoursePolicy;
 
 class CourseServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,8 @@ class CourseServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Lang/', 'Courses');
         DatabaseSeeder::$seeders[] = RolePermissionTableSeeder::class;
+
+        Gate::policy(Course::class, CoursePolicy::class);
     }
 
     public function boot(): void

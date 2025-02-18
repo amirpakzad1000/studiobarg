@@ -2,7 +2,10 @@
 
 namespace studiobarg\Category\Providers;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use studiobarg\Category\Models\Category;
+use studiobarg\Category\Policies\CategoryPolicy;
 
 class CategoryServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,8 @@ class CategoryServiceProvider extends ServiceProvider
         Factory::guessFactoryNamesUsing(function ($modelName) {
             return 'Databases\\Factories\\' . class_basename($modelName) . 'Factory';
         });
+
+        Gate::policy(Category::class, CategoryPolicy::class);
     }
 
     public function boot(): void

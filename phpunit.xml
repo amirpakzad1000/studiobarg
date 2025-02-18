@@ -18,6 +18,9 @@
         <testsuite name="Feature">
             <directory>./modules/studiobarg/Category/Tests/Feature</directory>
         </testsuite>
+        <testsuite name="Feature">
+            <directory>./modules/studiobarg/Course/Tests/Feature</directory>
+        </testsuite>
         <testsuite name="Unit">
             <directory>./modules/studiobarg/User/Tests/Unit</directory>
         </testsuite>

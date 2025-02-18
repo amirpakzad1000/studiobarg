@@ -4,8 +4,9 @@ namespace studiobarg\Course\Databases\Seeder;
 
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use studiobarg\RolePermission\Models\Permission;
+use studiobarg\RolePermission\Models\Role;
+
 
 class RolePermissionTableSeeder extends Seeder
 {
@@ -14,10 +15,12 @@ class RolePermissionTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Permission::findOrCreate('manage categories');
-        Permission::findOrCreate('manage role_permissions');
-        Permission::findOrCreate('manage teach');
+        foreach (\studiobarg\RolePermission\Models\Permission::$permissions as $permission) {
+            Permission::findOrCreate($permission);
+        }
 
-        Role::findOrCreate('teach')->givePermissionTo('manage teach');
+        foreach (\studiobarg\RolePermission\Models\Role::$roles as $name => $permissions) {
+            Role::findOrCreate($name)->givePermissionTo($permissions);
+        }
     }
 }
