@@ -33,14 +33,12 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request, CourseRepo $courseRepo)
     {
+        $this->authorize('create', Course::class);
         $course = $courseRepo->store($request);
         if ($request->hasFile('banner_id')) {
             // افزودن تصویر اصلی به کالکشن 'images'
             $course->addMedia($request->file('banner_id'))
                 ->toMediaCollection('images');
-
-            // اطمینان از اینکه تصاویر مختلف به درستی ایجاد شده‌اند
-            $course->refreshMedia(); // این اطمینان می‌دهد که نسخه‌های تبدیل‌شده به درستی بارگذاری شوند
 
             // دریافت نسخه‌های مختلف تصویر
             $thumbUrl = $course->getFirstMediaUrl('images', 'thumb');
@@ -64,11 +62,11 @@ class CourseController extends Controller
 
     public function update($id, CourseRequest $request, CourseRepo $courseRepo)
     {
+
         $course = $courseRepo->fingById($id);
-        // بررسی اینکه آیا تصویر جدیدی ارسال شده است یا خیر
-        // بررسی اینکه آیا تصویر جدیدی ارسال شده است یا خیر
+        $this->authorize('edit', $course);
         if ($request->hasFile('banner_id')) {
-            // بررسی صحت فایل بارگذاری شده
+
             if ($request->file('banner_id')->isValid()) {
                 // حذف تصویر قبلی از کالکشن 'images'
                 $course->clearMediaCollection('images');
@@ -90,6 +88,7 @@ class CourseController extends Controller
     public function destroy($id, CourseRepo $courseRepo)
     {
         $course = $courseRepo->fingById($id);
+        $this->authorize('delete', $course);
         $course->clearMediaCollection('images');
         $course->delete();
         return AjaxResponse::successResponse();

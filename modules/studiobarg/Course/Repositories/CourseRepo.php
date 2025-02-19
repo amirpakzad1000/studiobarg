@@ -4,6 +4,7 @@ namespace studiobarg\Course\Repositories;
 
 use Illuminate\Support\Str;
 use studiobarg\Course\Models\Course;
+use studiobarg\RolePermission\Models\Permission;
 
 class CourseRepo
 {
@@ -25,6 +26,7 @@ class CourseRepo
             'type' => $value->type,
             'status' => $value->status,
             'description' => $value->description,
+            'confirmation_status' => Course::CONFIRMATION_STATUS_PENDING,
         ]);
     }
 

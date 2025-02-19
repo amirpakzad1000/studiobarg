@@ -11,6 +11,17 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        config(['database.default' => 'sqlite']);
+        config(['database.connections.sqlite.database' => ':memory:']);
+
+        $this->artisan('migrate');
+
+        // غیرفعال کردن CSRF Middleware
+        $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+    }
     public function test_user_see_register(): void
     {
         $response = $this->get(route('register'));
@@ -112,13 +123,4 @@ class RegistrationTest extends TestCase
         $response->assertOk();
     }
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        // پاک‌سازی دیتابیس و اعمال مهاجرت‌ها
-        $this->artisan('migrate');
-
-        // غیرفعال کردن Middleware مربوط به CSRF
-        $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
-    }
 }

@@ -8,7 +8,17 @@ use Tests\TestCase;
 class ResetPasswordTest extends TestCase
 {
     use RefreshDatabase;
+    public function setUp(): void
+    {
+        parent::setUp();
+        config(['database.default' => 'sqlite']);
+        config(['database.connections.sqlite.database' => ':memory:']);
 
+        $this->artisan('migrate');
+
+        // غیرفعال کردن CSRF Middleware
+        $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+    }
     public function test_user_can_see_reset_request_form(): void
     {
         $this->get(route('password.request'))->assertStatus(200);;

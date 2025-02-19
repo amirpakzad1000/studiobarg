@@ -9,13 +9,13 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+
     use RefreshDatabase;
     use WithFaker;
 
     public function setUp(): void
     {
         parent::setUp();
-
         config(['database.default' => 'sqlite']);
         config(['database.connections.sqlite.database' => ':memory:']);
 

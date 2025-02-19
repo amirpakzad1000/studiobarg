@@ -35,7 +35,7 @@ class CourseRequest extends FormRequest
             'type' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
-            'banner_id' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240'
+            'banner_id' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ];
         return $rules;
     }

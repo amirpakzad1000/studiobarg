@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use studiobarg\Category\Models\Category;
 
 
 class Course extends Model implements HasMedia
@@ -46,5 +47,10 @@ class Course extends Model implements HasMedia
             ->height(600)
             ->sharpen(10) // بهبود وضوح تصویر
             ->nonQueued(); // اجرای هم‌زمان برای تست
+        }
+
+        public function category()
+        {
+            return $this->belongsTo(Category::class);
         }
 }

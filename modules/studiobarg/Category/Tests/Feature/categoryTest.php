@@ -16,6 +16,17 @@ class categoryTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        config(['database.default' => 'sqlite']);
+        config(['database.connections.sqlite.database' => ':memory:']);
+
+        $this->artisan('migrate');
+
+        // غیرفعال کردن CSRF Middleware
+        $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+    }
     public function test_manage_categories_panel_permission_holder_can_see_categories_panel(): void
     {
         $this->actionAdminAs();
