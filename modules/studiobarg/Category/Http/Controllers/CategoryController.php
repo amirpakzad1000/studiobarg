@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use studiobarg\Category\Http\Requests\CategoryRequest;
 use studiobarg\Category\Models\Category;
 use studiobarg\Category\Repository\categoryRepo;
-use studiobarg\Category\Responses\AjaxResponse;
+use studiobarg\Common\Responses\AjaxResponses;
 
 class CategoryController extends Controller
 {
@@ -54,9 +54,9 @@ class CategoryController extends Controller
         $this->authorize('manage', category::class);
         try {
             $this->repo->delete($categoryId);
-            return AjaxResponse::successResponse();
+            return AjaxResponses::successResponse();
         } catch (\Exception $exception) {
-           return AjaxResponse::errorResponse($exception);
+           return AjaxResponses::FailedResponse($exception);
         }
     }//End Method
 }

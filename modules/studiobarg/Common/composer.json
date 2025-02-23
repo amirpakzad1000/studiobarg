@@ -1,0 +1,18 @@
+{
+    "name": "studiobarg/common",
+    "autoload": {
+        "psr-4": {
+            "studiobarg\\Common\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "studiobarg\\Common\\Providers\\CommonServiceProvider"
+            ]
+        }
+    }
+}

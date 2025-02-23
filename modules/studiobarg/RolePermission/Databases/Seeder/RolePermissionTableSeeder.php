@@ -1,11 +1,11 @@
 <?php
 
-namespace studiobarg\Course\Databases\Seeder;
+namespace studiobarg\RolePermission\Databases\Seeder;
 
 
 use Illuminate\Database\Seeder;
-use studiobarg\RolePermission\Models\Permission;
-use studiobarg\RolePermission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 
 class RolePermissionTableSeeder extends Seeder

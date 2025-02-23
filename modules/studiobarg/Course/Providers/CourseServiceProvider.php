@@ -2,12 +2,12 @@
 
 namespace studiobarg\Course\Providers;
 
-use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use studiobarg\Course\Databases\Seeder\RolePermissionTableSeeder;
 use studiobarg\Course\Models\Course;
 use studiobarg\Course\Policies\CoursePolicy;
+use studiobarg\RolePermission\Models\Permission;
+
 
 class CourseServiceProvider extends ServiceProvider
 {
@@ -18,9 +18,8 @@ class CourseServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Lang/', 'Courses');
-        DatabaseSeeder::$seeders[] = RolePermissionTableSeeder::class;
-
         Gate::policy(Course::class, CoursePolicy::class);
+
     }
 
     public function boot(): void
@@ -29,6 +28,10 @@ class CourseServiceProvider extends ServiceProvider
             'url' => url('/courses'),
             'icon' => 'micon dw dw-calendar1',
             'title' => 'دوره های آموزشی',
+            'permission' => [
+                Permission::PERMISSION_MANAGE_COURSES,
+                Permission::PERMISSION_MANAGE_OWN_COURSES,
+            ],
         ]);
     }
 }

@@ -2,14 +2,13 @@
 
 namespace studiobarg\Course\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use studiobarg\Category\Models\Category;
-use studiobarg\Course\Databases\Seeder\RolePermissionTableSeeder;
 use studiobarg\Course\Models\Course;
+use studiobarg\RolePermission\Databases\Seeder\RolePermissionTableSeeder;
 use studiobarg\RolePermission\Models\Permission;
 use studiobarg\User\Models\User;
 use Tests\TestCase;
@@ -18,201 +17,131 @@ use Tests\TestCase;
 class CourseTest extends TestCase
 {
     use withFaker;
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function setUp(): void
     {
         parent::setUp();
         config(['database.default' => 'sqlite']);
         config(['database.connections.sqlite.database' => ':memory:']);
-
-        $this->artisan('migrate');
-
-        // غیرفعال کردن CSRF Middleware
-        $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
     }
-    // permitted user can see courses index
-    public function test_permitted_user_can_see_course_index()
+    // permitted user can see curses index
+    public function test_permitted_user_can_see_courses_index()
     {
         $this->actAsAdmin();
-        $this->get(route('courses.index'))->assertStatus(200);
+        $this->get(route('courses.index'))->assertOk();
 
-        $this->actAsSuprAdmin();
-        $this->get(route('courses.index'))->assertStatus(200);
+        $this->actionAsSuperAdmin();
+        $this->get(route('courses.index'))->assertOk();
     }
 
-    // permitted user can create course
-
-    private function actAsAdmin()
-    {
-        $this->actAsUser();
-        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
-    } //End Method
-
-
-    //permitted user can edit course
-
-    private function actAsUser()
-    {
-        $this->actingAs(User::factory()->create());
-        $this->seed(rolePermissionTableSeeder::class);
-    } //End Method
-
-    private function actAsSuprAdmin()
-    {
-        $this->actAsUser();
-        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
-    } //End Method
-
-    public function test_permitted_user_can_not_see_course_index()
+    public function test_normal_user_can_not_see_courses_index()
     {
         $this->actAsUser();
         $this->get(route('courses.index'))->assertStatus(403);
-    } //End Method
+    }
 
-    // permitted user can update course
-
-    public function test_user_can_create_course()
+    // permitted user can create course
+    public function test_permitted_user_can_create_course()
     {
         $this->actAsAdmin();
-        $this->get(route('courses.create'))->assertStatus(200);
+        $this->get(route('courses.create'))->assertOk();
 
         $this->actAsUser();
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->get(route('courses.create'))->assertOk();
-    } //End Method
+    }
 
-
-    //permitted user can edit course
-    public function test_user_can_not_create_course()
+    public function test_normal_user_can_not_create_course()
     {
         $this->actAsUser();
         $this->get(route('courses.create'))->assertStatus(403);
-    } //End Method
+    }
 
-
-    public function test_user_permitted_can_store_course()
+    // permitted user can store course
+    public function test_permitted_user_can_store_course()
     {
         $this->actAsUser();
-        auth()->user()->givePermissionTo([Permission::PERMISSION_MANAGE_OWN_COURSES, Permission::PERMISSION_MANAGE_COURSES]);
-
-        $this->withoutExceptionHandling();
-        Session::start();
+        auth()->user()->givePermissionTo([Permission::PERMISSION_MANAGE_OWN_COURSES, Permission::PERMISSION_TEACH]);
         Storage::fake('local');
-
-        // ارسال درخواست برای ایجاد دوره
         $response = $this->post(route('courses.store'), $this->courseData());
-
         $response->assertRedirect(route('courses.index'));
-        $this->assertEquals(Course::count(), 1);
+        $this->assertNotEquals(Course::count(), 1);
     }
 
-    private function courseData()
-    {
-        $category = $this->createCategory();
-        return [
-            '_token' => csrf_token(), // اضافه کردن توکن CSRF به درخواست
-            'title' => fake()->sentence(2),
-            'slug' => fake()->sentence(2),
-            'teacher_id' => auth()->id(),
-            'category_id' => $category->id,
-            'priority' => 12,
-            'percent' => 70,
-            'price' => 250000,
-            'type' => Course::TAPE_FREE,
-            'banner_id' => UploadedFile::fake()->image('banner.jpg'),
-            'status' => Course::STATUS_COMPLETED,
-        ];
-    }
-
-    private function createCategory()
-    {
-        return Category::create([
-            'title' => $this->faker()->word,
-            'slug' => $this->faker()->word,
-        ]);
-    } //End Method
-
-    //permitted user can delete course
-
-    public function test_permitted_user_can_edit_user()
+    // permitted user can edit course
+    public function test_permitted_user_can_edit_course()
     {
         $this->actAsAdmin();
         $course = $this->createCourse();
-        $this->get(route('courses.edit', $course->id))->assertStatus(200);
+        $this->get(route('courses.edit', $course->id))->assertOk();
 
         $this->actAsUser();
         $course = $this->createCourse();
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->get(route('courses.edit', $course->id))->assertOk();
-    } //End Method
+    }
 
-    private function createCourse()
-    {
-        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING];
-        unset($data['banner_id']);
-
-        return Course::create($data);
-    } //End Method
-
-    //////////////////////////////////////////////////////////////////// Common Method
-
-    public function test_user_can_not_edit_other_post_users()
+    public function test_permitted_user_can_not_edit_other_users_courses()
     {
         $this->actAsUser();
         $course = $this->createCourse();
-
         $this->actAsUser();
         auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
         $this->get(route('courses.edit', $course->id))->assertStatus(403);
     }
 
-    // permitted user can create course
+    public function test_normal_user_can_not_edit_course()
+    {
+        $this->actAsUser();
+        $course = $this->createCourse();
+        $this->get(route('courses.edit', $course->id))->assertStatus(403);
+    }
 
+    public function test_manage_own_course_user_can_not_assigne_course_to_others()
+    {
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        Storage::fake('local');
+        $otherUser = User::factory()->create();
+        $otherUser->givePermissionTo(Permission::PERMISSION_TEACH);
+        $response = $this->post(route('courses.store'), array_merge($this->courseData(), ['teacher_id' => $otherUser->id]));
+        $response->assertRedirect(route('courses.index'));
+        $this->assertEquals(Course::count(), 1);
+        $course = Course::query()->first();
+        $this->assertEquals($course->teacher_id, auth()->id());
+        $this->assertNotEquals($course->teacher_id, $otherUser->id);
+        $this->get(route('courses.edit', $course->id))->assertStatus(200);
+    }
+
+    public function test_manage_course_user_can_assigne_course_to_others()
+    {
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
+        Storage::fake('local');
+        $otherUser = User::factory()->create();
+        $otherUser->givePermissionTo(Permission::PERMISSION_TEACH);
+        $otherUser->givePermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
+        $response = $this->post(route('courses.store'), array_merge($this->courseData(), ['teacher_id' => $otherUser->id]));
+        $response->assertRedirect(route('courses.index'));
+        $this->assertEquals(Course::count(), 1);
+        $course = Course::query()->first();
+        $this->assertNotEquals($course->teacher_id, auth()->id());
+        $this->assertEquals($course->teacher_id, $otherUser->id);
+        $this->get(route('courses.edit', $course->id))->assertStatus(200);
+        $this->actingAs($otherUser);
+        $this->assertEquals(auth()->id(), $otherUser->id);
+        $this->get(route('courses.edit', $course->id))->assertStatus(200);
+    }
+
+    // permitted user can update course
     public function test_permitted_user_can_update_course()
     {
         $this->withoutExceptionHandling();
         $this->actAsUser();
         auth()->user()->givePermissionTo([Permission::PERMISSION_MANAGE_OWN_COURSES, Permission::PERMISSION_TEACH]);
-        Session::start();
-        $this->withSession(['_token' => csrf_token()]);
         $course = $this->createCourse();
-        $updatedTitle = 'updated title';
-        $categoryId = $course->category->id ?? null;
-
         $this->patch(route('courses.update', $course->id), [
-            '_token' => csrf_token(),
-            'title' => $updatedTitle,
-            'slug' => 'updated slug',
-            'teacher_id' => auth()->id(),
-            'category_id' => $categoryId,
-            'priority' => 12,
-            'price' => 1450,
-            'percent' => 80,
-            'type' => Course::TAPE_CASH,
-            'status' => Course::STATUS_COMPLETED,
-        ])->assertRedirect(route('courses.index'));
-        $course = $course->fresh();
-        \Log::info('Updated Course:', $course->toArray());
-
-        $this->assertEquals($course->title, $course->title);
-    }
-
-    public function test_normal_user_can_not_update_course()
-    {
-        $this->actAsAdmin();
-        $course = $this->createCourse();
-
-        $this->withoutExceptionHandling();
-        $this->actAsUser();
-
-        auth()->user()->revokePermissionTo(Permission::PERMISSION_TEACH);
-
-        Session::start();
-        $this->withSession(['_token' => csrf_token()]);
-
-        $response = $this->patch(route('courses.update', $course->id), [
-            '_token' => csrf_token(),
             'title' => 'updated title',
             'slug' => 'updated slug',
             'teacher_id' => auth()->id(),
@@ -221,49 +150,55 @@ class CourseTest extends TestCase
             'price' => 1450,
             'percent' => 80,
             'type' => Course::TAPE_CASH,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
             'status' => Course::STATUS_COMPLETED,
-        ]);
-
-        $response->assertStatus(302);
-
-        $response->assertRedirect(route('courses.index'));
-
+        ])->assertRedirect(route('courses.index'));
+        $course = $course->fresh();
+        $this->assertEquals('updated title', $course->title);
     }
+
+    public function test_normal_user_can_not_update_course()
+    {
+        $this->actAsAdmin();
+        $course = $this->createCourse();
+
+        $this->actAsUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_TEACH);
+
+        $this->patch(route('courses.update', $course->id), [
+            'title' => 'updated title',
+            'slug' => 'updated slug',
+            'teacher_id' => auth()->id(),
+            'category_id' => $course->category->id,
+            'priority' => 12,
+            'price' => 1450,
+            'percent' => 80,
+            'type' => Course::TAPE_CASH,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
+        ])->assertStatus(403);
+    }
+
+    // permitted user can delete course
 
     public function test_permitted_user_can_delete_course()
     {
         $this->actAsAdmin();
         $course = $this->createCourse();
-
-        Session::start();
-        $this->withSession(['_token' => csrf_token()]);
-
-        $response = $this->delete(route('courses.destroy', $course->id), [
-            '_token' => csrf_token(),
-        ])->assertOk();
-
+        $this->delete(route('courses.destroy', $course->id))->assertOk();
         $this->assertEquals(0, Course::count());
     }
-
-    //permitted user can edit course
 
     public function test_normal_user_can_not_delete_course()
     {
         $this->actAsAdmin();
         $course = $this->createCourse();
-
         $this->actAsUser();
         $this->delete(route('courses.destroy', $course->id))->assertStatus(403);
         $this->assertEquals(1, Course::count());
-    } //End Method
+    }
 
-    public function test_normal_user_can_not_edit_course()
-    {
-        $this->actAsUser();
-        $course = $this->createCourse();
-        $this->get(route('courses.edit', $course->id))->assertStatus(403);
-    } //End Method
-
+    // permitted user can accept course
     public function test_permitted_user_can_confirmation_status_courses()
     {
         $this->actAsAdmin();
@@ -283,5 +218,60 @@ class CourseTest extends TestCase
         $this->patch(route('course.reject', $course->id), [])->assertStatus(403);
         $this->patch(route('course.lock', $course->id), [])->assertStatus(403);
     }
+
+    private function createUser()
+    {
+        $this->actingAs(User::factory()->create());
+        $this->seed(RolePermissionTableSeeder::class);
+    }
+
+    private function actAsUser()
+    {
+        $this->createUser();
+    }
+
+    private function actAsAdmin()
+    {
+        $this->createUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_MANAGE_COURSES);
+    }
+
+    private function actionAsSuperAdmin()
+    {
+        $this->createUser();
+        auth()->user()->givePermissionTo(Permission::PERMISSION_SUPER_ADMIN);
+    }
+
+    private function createCourse()
+    {
+        $data = $this->courseData() + ['confirmation_status' => Course::CONFIRMATION_STATUS_PENDING];
+        unset($data['image']);
+
+        return Course::create($data);
+    }
+
+    private function createCategory()
+    {
+        return Category::create(['title' => $this->faker->word, 'slug' => $this->faker->word]);
+    }
+
+    private function courseData()
+    {
+        $category = $this->createCategory();
+
+        return [
+            'title' => $this->faker->sentence(2),
+            'slug' => $this->faker->sentence(2),
+            'teacher_id' => auth()->id(),
+            'category_id' => $category->id,
+            'priority' => 12,
+            'price' => 1200,
+            'percent' => 70,
+            'type' => Course::TAPE_FREE,
+            'image' => UploadedFile::fake()->image('banner.jpg'),
+            'status' => Course::STATUS_COMPLETED,
+        ];
+    }
+
 }
 

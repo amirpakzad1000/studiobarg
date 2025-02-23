@@ -8,6 +8,7 @@ use studiobarg\User\Http\Controllers\Auth\PasswordResetLinkController;
 use studiobarg\User\Http\Controllers\Auth\RegisteredUserController;
 use studiobarg\User\Http\Controllers\Auth\VerifyEmailController;
 use studiobarg\User\Http\Controllers\ProfileController;
+use studiobarg\User\Http\Controllers\UserController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -17,6 +18,10 @@ Route::middleware('auth')->group(function () {
 
 Route::group([
     'middleware' => ['web']], function () {
+    Route::resource('/users', UserController::class);
+    Route::post('/users/{user}/add/role', [UserController::class,'addRole'])->name('users.addRole');
+    Route::delete('users/{user}/remove/{role}/role', [UserController::class,'removeRole'])->name('users.removeRole');
+    Route::patch('users/{user}/manualVerify', [UserController::class,'manualVerify'])->name('users.manualVerify');
 
     //login logout
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');

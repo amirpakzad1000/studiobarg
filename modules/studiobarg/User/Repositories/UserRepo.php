@@ -21,8 +21,41 @@ class UserRepo
         try {
             return User::findOrFail($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // خطا را مدیریت کنید
-            return null; // یا خطای مناسب
+            return null;
         }
+    }
+    public function paginate()
+    {
+        return User::paginate();
+    }
+
+    public function update($userId, $values)
+    {
+        $update = [
+            'name' => $values->name,
+            'email' => $values->email,
+            'mobile' => $values->mobile,
+            'username' => $values->username,
+            'status' => $values->status,
+            'bio' => $values->bio,
+            'instagram' => $values->instagram,
+            'facebook' => $values->facebook,
+            'twitter' => $values->twitter,
+            'linkedin' => $values->linkedin,
+            'website' => $values->website,
+            'github' => $values->github,
+            'youtube' => $values->youtube,
+        ];
+        if (! is_null($values->new_password)) {
+            $update['password'] = bcrypt($values->new_password);
+        }
+
+        $user = User::find($userId);
+        $user->syncRoles([]);
+        if ($values['role']) {
+            $user->assignRole($values['role']);
+        }
+
+        return User::where('id', $userId)->update($update);
     }
 }

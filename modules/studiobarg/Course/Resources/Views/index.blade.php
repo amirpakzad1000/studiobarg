@@ -75,19 +75,19 @@
                                            href="#">
                                             <i class="dw dw-delete-3"></i> حذف</a>
 
-                                        <a class="dropdown-item"
-                                           onclick="updateConfirmationStatus(event,'{{ route('course.accept',
-                                           $course->id)}}','آیا از تایید این عملیات مطمئن هستید؟','تایید شده')">
+                                        <a class="dropdown-item" href=""
+                                           onclick="updateConfirmationStatus(event, '{{ route('course.reject', $course->id) }}',
+                                    'آیا از تایید این آیتم اطمینان دارید؟' , 'تایید شده')">
                                             <i class="dw dw-check"></i> تایید</a>
 
-                                        <a class="dropdown-item"
-                                           onclick="updateConfirmationStatus(event,'{{ route('course.reject',
+                                        <a class="dropdown-item" href=""
+                                           onclick="updateConfirmationStatus(event,'{{ route('course.accept',
                                            $course->id)}}','آیا از رد این عملیات مطمئن هستید؟','رد شده')">
                                             <i class="dw dw-ban"></i> رد </a>
 
-                                        <a class="dropdown-item"
+                                        <a class="dropdown-item" href=""
                                            onclick="updateConfirmationStatus(event,'{{ route('course.lock',
-                                           $course->id)}}','آیا از قفل کردن این عملیات آیتم مطمئن هستید؟','قفل شده','status')">
+                                           $course->id)}}','آیا از قفل کردن این عملیات آیتم مطمئن هستید؟','قفل شده','قفل شده')">
                                             <i class="dw dw-ban"></i> قفل شده </a>
                                     </div>
                                 </div>

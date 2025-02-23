@@ -21,5 +21,10 @@ return [
             'icon' => 'micon dw dw-calendar1',
             'title' => 'دوره های آموزشی',
         ],
+        'users' => [
+            'url' => url('/users'),
+            'icon' => 'micon dw dw-calendar1',
+            'title' => 'کاربران',
+        ],
     ],
 ];

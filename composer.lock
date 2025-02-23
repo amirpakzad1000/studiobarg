@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17a1555a5541df7b5703aaa6046251ac",
+    "content-hash": "c795396b1c0ec1ac119c625ea9073c38",
     "packages": [
         {
             "name": "brick/math",
@@ -4042,6 +4042,34 @@
                 }
             ],
             "time": "2025-01-13T13:04:43+00:00"
+        },
+        {
+            "name": "studiobarg/common",
+            "version": "dev-registerNewUser",
+            "dist": {
+                "type": "path",
+                "url": "modules/studiobarg/common",
+                "reference": "558e186c14363e4010c1ea36726b4a0d5718c34e"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "studiobarg\\Common\\Providers\\CommonServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "studiobarg\\Common\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "symfony/clock",
@@ -10119,7 +10147,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "studiobarg/common": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

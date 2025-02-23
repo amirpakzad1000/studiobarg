@@ -14,6 +14,7 @@ class CategoryServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/category_routes.php');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'Category');
         $this->loadMigrationsFrom(__DIR__ . '/../Databases/Migrations');
+
         Factory::guessFactoryNamesUsing(function ($modelName) {
             return 'Databases\\Factories\\' . class_basename($modelName) . 'Factory';
         });

@@ -65,6 +65,13 @@ body {
 table.dataTable {
     text-align: right;
 }
+.deletable-item-list .delete-item{
+   display: none;
+}
+
+.deletable-item-list:hover .delete-item{
+    display: inline-block;
+}
 
 
 @media (min-width: 1301px) and (max-width: 1400px) {

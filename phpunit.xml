@@ -16,6 +16,7 @@
             <directory>./modules/studiobarg/User/Tests/Feature</directory>
             <directory>./modules/studiobarg/Category/Tests/Feature</directory>
             <directory>./modules/studiobarg/Course/Tests/Feature</directory>
+            <directory>./modules/studiobarg/RolePermission/Tests/Feature</directory>
         </testsuite>
     </testsuites>
 

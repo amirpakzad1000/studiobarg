@@ -13,48 +13,35 @@ class CoursePolicy
     {
         //
     }
-    public function manage(User $user)
+    public function index(User $user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
-            $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES)) {
-            return true;
-        }
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
+            $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
     }
 
-    public function create(user $user)
+    public function create(User $user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
-            $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES)) {
-            return true;
-        }
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
+            $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
     }
 
-    public function edit(User $user,$course)
+    public function edit(User $user, $course)
     {
         if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) && $course->teacher_id == $user->id) {
-            return true;
-        }
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES) &&
+            $course->teacher_id == $user->id;
     }
 
-    public function delete($user)
+    public function delete(User $user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) {
-            return true;
-        }
-
-        return null;
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES);
     }
 
-    public function change_confirmation_status($user)
+    public function change_confirmation_status(User $user)
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) {
-            return true;
-        }
-
-        return null;
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES);
     }
 }

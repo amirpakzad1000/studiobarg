@@ -48,6 +48,7 @@
         href="src/plugins/jquery-steps/jquery.steps.css"
     />
     <link rel="stylesheet" type="text/css" href="/vendors/styles/style.css" />
+    @stack('style')
 </head>
 
 <body class="login-page">
@@ -122,5 +123,6 @@
 <script src="vendors/scripts/layout-settings.js"></script>
 <script src="src/plugins/jquery-steps/jquery.steps.js"></script>
 <script src="vendors/scripts/steps-setting.js"></script>
+@stack('js')
 </body>
 </html>

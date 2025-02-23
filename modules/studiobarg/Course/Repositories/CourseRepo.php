@@ -30,7 +30,7 @@ class CourseRepo
         ]);
     }
 
-    public function fingById($id)
+    public function findById($id)
     {
         return Course::query()->findOrFail($id);
     }

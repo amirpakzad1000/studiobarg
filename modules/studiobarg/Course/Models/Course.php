@@ -18,13 +18,12 @@ class Course extends Model implements HasMedia
     const STATUS_COMPLETED = "completed";
     const STATUS_NOT_COMPLETED = "not-completed";
     const STATUS_LOCKED = "locked";
-    static $types = [self::TAPE_FREE, self::TAPE_CASH];
-    static $statuses = [self::STATUS_COMPLETED, self::STATUS_NOT_COMPLETED, self::STATUS_LOCKED];
-
     const CONFIRMATION_STATUS_ACCEPTED = "accepted";
     const CONFIRMATION_STATUS_PENDING = "pending";
     const CONFIRMATION_STATUS_REJECTED = "rejected";
-    static mixed $confirmationStatuses=[self::CONFIRMATION_STATUS_ACCEPTED,
+    static $types = [self::TAPE_FREE, self::TAPE_CASH];
+    static $statuses = [self::STATUS_COMPLETED, self::STATUS_NOT_COMPLETED, self::STATUS_LOCKED];
+    static mixed $confirmationStatuses = [self::CONFIRMATION_STATUS_ACCEPTED,
         self::CONFIRMATION_STATUS_PENDING, self::CONFIRMATION_STATUS_REJECTED];
     protected $guarded = [];
 
@@ -47,10 +46,10 @@ class Course extends Model implements HasMedia
             ->height(600)
             ->sharpen(10) // بهبود وضوح تصویر
             ->nonQueued(); // اجرای هم‌زمان برای تست
-        }
+    }
 
-        public function category()
-        {
-            return $this->belongsTo(Category::class);
-        }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

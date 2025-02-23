@@ -1,9 +1,9 @@
-function deleteItem(event, route) {
+function deleteItem(event, route,element = 'tr') {
     event.preventDefault();
     if (confirm('آیا از این عملیات مطمئن هستید؟')) {
         $.post(route, {_method: "delete", _token: $('meta[name="_token"]').attr('content')})
             .done(function (response) {
-                event.target.closest('tr').remove();
+                event.target.closest(element).remove();
                 $.toaster({
                     heading: 'عملیات موفق',
                     title: 'پیام',

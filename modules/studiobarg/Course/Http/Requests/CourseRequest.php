@@ -3,6 +3,9 @@
 namespace studiobarg\Course\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use studiobarg\Course\Models\Course;
+use studiobarg\Course\Rules\ValidTeacher;
 
 
 class CourseRequest extends FormRequest
@@ -25,18 +28,27 @@ class CourseRequest extends FormRequest
         $courseId = request()->route('course');
 
         $rules = [
-            'title' => 'required|string',
-            'slug' => 'required|string|min:3|max:100|unique:courses,slug,'. $courseId,
+            'title' => 'required|min:3|max:190',
+            'slug' => 'required|min:3|max:190|unique:courses,slug',
             'priority' => 'required|integer',
             'price' => 'required|numeric',
             'percent' => 'required|numeric',
             'tags' => 'nullable|string',
-            'teacher_id' => 'required',
-            'type' => 'required|string',
+            'teacher_id' => ['sometimes', 'exists:users,id', new ValidTeacher()],
+            'type' => ['required', Rule::in(Course::$types)],
+            'status' => ['required', Rule::in(Course::$statuses)],
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
-            'banner_id' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+
         ];
+        if (request()->isMethod('PATCH')) {
+            $rules['slug'] = [
+                'required',
+                'min:3',
+                'max:190',
+                Rule::unique('courses', 'slug')->ignore($courseId),
+            ];
+        }
         return $rules;
     }
 
