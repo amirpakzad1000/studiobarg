@@ -8,5 +8,6 @@ return [
     studiobarg\RolePermission\providers\RolePermissionServiceProvider::class,
     studiobarg\User\providers\UserServiceProvider::class,
     studiobarg\Course\Providers\CourseServiceProvider::class,
-   // studiobarg\Media\Providers\MediaServiceProvider::class,
+    studiobarg\Articles\Providers\ArticlesServiceProvider::class,
+
 ];

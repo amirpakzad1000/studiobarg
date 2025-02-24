@@ -16,6 +16,12 @@ class UserRepo
     {
         return User::role(Permission::PERMISSION_TEACH)->get();
     }
+
+    public function getAuthor()
+    {
+        return User::role(Permission::PERMISSION_AUTHOR)->get();
+    }
+
     public function findById($id)
     {
         try {
@@ -24,6 +30,7 @@ class UserRepo
             return null;
         }
     }
+
     public function paginate()
     {
         return User::paginate();
@@ -46,7 +53,7 @@ class UserRepo
             'github' => $values->github,
             'youtube' => $values->youtube,
         ];
-        if (! is_null($values->new_password)) {
+        if (!is_null($values->new_password)) {
             $update['password'] = bcrypt($values->new_password);
         }
 

@@ -5,6 +5,7 @@ namespace studiobarg\Category\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
+use studiobarg\Articles\Models\Article;
 use studiobarg\Course\Models\Course;
 
 class Category extends Model
@@ -50,5 +51,10 @@ class Category extends Model
     public function course()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function article()
+    {
+        return $this->hasMany(Article::class);
     }
 }

@@ -5,6 +5,7 @@ namespace studiobarg\Course\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use studiobarg\Course\Models\Course;
+use studiobarg\Course\Policies\ArticlePolicy;
 use studiobarg\Course\Policies\CoursePolicy;
 use studiobarg\RolePermission\Models\Permission;
 

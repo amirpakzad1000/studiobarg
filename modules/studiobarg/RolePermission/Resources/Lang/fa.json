@@ -3,9 +3,12 @@
     "manage permissions" : "مدیریت نقش های کاربری",
     "manage courses" : "مدیریت دوره ها",
     "teacher" : "تدریس",
+    "author" : "نویسنده",
     "super admin" : "مدیر کل",
     "manage role_permissions" : "مدیریت نقش کاربری",
     "manage own courses" : "مدیریت دوره های  کاربر",
+    "manage own post" : "مدیریت مقالات کاربر",
+    "manage post" : "مدیریت مقالات",
     "manage users" : "مدیریت کاربران"
 
 }

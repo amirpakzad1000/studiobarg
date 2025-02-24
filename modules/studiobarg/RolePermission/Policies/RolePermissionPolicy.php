@@ -4,44 +4,34 @@ namespace studiobarg\RolePermission\Policies;
 
 use studiobarg\RolePermission\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use studiobarg\User\Models\User;
 
 class RolePermissionPolicy
 {
     use HandlesAuthorization;
 
-    public function index($user)
+    private function hasAccess(User $user): bool
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_ROLE_PERMISSION)) {
-            return true;
-        }
-
-        return null;
+        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_ROLE_PERMISSION);
     }
 
-    public function create($user)
+    public function index(User $user): bool
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_ROLE_PERMISSION)) {
-            return true;
-        }
-
-        return null;
+        return $this->hasAccess($user);
     }
 
-    public function edit($user)
+    public function create(User $user): bool
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_ROLE_PERMISSION)) {
-            return true;
-        }
-
-        return null;
+        return $this->hasAccess($user);
     }
 
-    public function delete($user)
+    public function edit(User $user): bool
     {
-        if ($user->hasPermissionTo(Permission::PERMISSION_MANAGE_ROLE_PERMISSION)) {
-            return true;
-        }
+        return $this->hasAccess($user);
+    }
 
-        return null;
+    public function delete(User $user): bool
+    {
+        return $this->hasAccess($user);
     }
 }

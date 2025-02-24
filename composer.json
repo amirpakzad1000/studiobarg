@@ -34,8 +34,7 @@
             "studiobarg\\Category\\": "modules/studiobarg/Category/",
             "studiobarg\\RolePermission\\": "modules/studiobarg/RolePermission/",
             "studiobarg\\Course\\": "modules/studiobarg/Course/",
-            "studiobarg\\Media\\": "modules/studiobarg/Media/",
-            "Database\\Factories\\": "database/factories/",
+            "studiobarg\\Articles\\": "modules/studiobarg/Articles/",
             "Database\\Seeders\\": "database/seeders/"
         }
     },

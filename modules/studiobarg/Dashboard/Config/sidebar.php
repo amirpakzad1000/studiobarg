@@ -26,5 +26,10 @@ return [
             'icon' => 'micon dw dw-calendar1',
             'title' => 'کاربران',
         ],
+        'articles' => [
+            'url' => url('/articles'),
+            'icon' => 'micon dw dw-calendar1',
+            'title' => 'کاربران',
+        ],
     ],
 ];
